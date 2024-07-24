@@ -2,42 +2,19 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>坏孩子</title>
   
-  
+  <subtitle>每一个不曾起舞的日子都是对生命的辜负</subtitle>
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-07-24T02:15:51.555Z</updated>
+  <updated>2024-07-23T14:22:00.885Z</updated>
   <id>http://example.com/</id>
   
   <author>
-    <name>John Doe</name>
+    <name>坏孩子</name>
     
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>test</title>
-    <link href="http://example.com/2024/07/24/test/"/>
-    <id>http://example.com/2024/07/24/test/</id>
-    <published>2024-07-24T02:15:05.000Z</published>
-    <updated>2024-07-24T02:15:51.555Z</updated>
-    
-    <content type="html"><![CDATA[<pre><code>&lt;?php phpinfo();</code></pre><h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><p>这是一个测试</p><p>![](C:\Users\DELL\Pictures\Saved Pictures\QQ图片2023102422233.png)</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;pre&gt;&lt;code&gt;&amp;lt;?php phpinfo();
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&quot;test&quot;&gt;&lt;a href=&quot;#test&quot; class=&quot;headerlink&quot; title=&quot;test&quot;&gt;&lt;/a&gt;test&lt;/h2&gt;&lt;p&gt;这是一个测试&lt;/p&gt;
-&lt;p&gt;![]</summary>
-      
-    
-    
-    
-    
-  </entry>
   
   <entry>
     <title>Hello World</title>
