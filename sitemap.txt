@@ -1,2 +1,4 @@
+http://example.com/2024/07/24/test/
 http://example.com/2024/07/23/hello-world/
 http://example.com/
+http://example.com/tags/A/

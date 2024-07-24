@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>坏孩子</title>
+  <title>坏孩子のSimple Blogs</title>
   
-  <subtitle>每一个不曾起舞的日子都是对生命的辜负</subtitle>
+  <subtitle>每一个不曾起舞的日子都是对生命的辜负。</subtitle>
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-07-23T14:22:00.885Z</updated>
+  <updated>2024-07-24T04:28:17.052Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,45 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>测试</title>
+    <link href="http://example.com/2024/07/24/test/"/>
+    <id>http://example.com/2024/07/24/test/</id>
+    <published>2024-07-24T02:15:05.000Z</published>
+    <updated>2024-07-24T04:28:17.052Z</updated>
+    
+    <content type="html"><![CDATA[<pre><code class="php">&lt;?php phpinfo();a    a    a    a    a    a    a    a    aa    a    a    a    a    a    a    a    a    a        A    </code></pre><h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><p>这是一个测试</p><p>![](C:\Users\DELL\Pictures\Saved Pictures\QQ图片2023102422233.png)</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;pre&gt;&lt;code class=&quot;php&quot;&gt;&amp;lt;?php phpinfo();
+a
+    a
+    a
+    a
+    a
+    a
+    a
+    a
+    aa
+    a
+    a
+    a
+    a
+    a
+    a
+    a
+    </summary>
+      
+    
+    
+    
+    
+    <category term="A" scheme="http://example.com/tags/A/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
