@@ -1,8 +1,8 @@
 /* PrismJS 1.29.0
-https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+armasm+asm6502+asmatmel+c+cpp+django+docker+git+go+graphql+http+hpkp+hsts+ini+java+javadoc+javadoclike+javastacktrace+json+latex+markdown+markup-templating+mongodb+php+phpdoc+php-extras+powershell+python+sql+typescript+uri+vim+xml-doc+yaml&plugins=line-highlight+line-numbers+custom-class+file-highlight+toolbar */
+https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+apacheconf+armasm+asm6502+asmatmel+bash+basic+c+cpp+css-extras+csv+django+docker+git+linker-script+go+graphql+http+hpkp+hsts+icon+ini+java+javadoc+javadoclike+javastacktrace+jsdoc+js-extras+json+json5+jsonp+jsstacktrace+js-templates+latex+lua+markdown+markup-templating+mongodb+nginx+php+phpdoc+php-extras+plsql+powershell+python+rust+smarty+sql+typescript+uri+vim+wasm+xml-doc+yaml&plugins=line-highlight+line-numbers+custom-class+file-highlight+highlight-keywords+data-uri-highlight */
 code[class*=language-],
 pre[class*=language-] {
-    color: rgba(0, 0, 0, 0.886);
+    color: #ccc;
     background: 0 0;
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
     font-size: 1em;
@@ -29,7 +29,7 @@ pre[class*=language-] {
 
 :not(pre)>code[class*=language-],
 pre[class*=language-] {
-    background: #f5f2f0
+    background: #2d2d2d
 }
 
 :not(pre)>code[class*=language-] {
@@ -47,7 +47,7 @@ pre[class*=language-] {
 }
 
 .token.punctuation {
-    color: #00000083
+    color: #ccc
 }
 
 .token.attr-name,
@@ -193,9 +193,9 @@ pre[class*=language-].line-numbers>code {
 .line-numbers .line-numbers-rows {
     position: absolute;
     pointer-events: none;
-    top: -0.1em;
+    top: 0;
     font-size: 100%;
-    left: -3.2em;
+    left: -3.8em;
     width: 3em;
     letter-spacing: -1px;
     border-right: 1px solid #999;
@@ -216,68 +216,4 @@ pre[class*=language-].line-numbers>code {
     display: block;
     padding-right: .8em;
     text-align: right
-}
-
-div.code-toolbar {
-    position: relative
-}
-
-div.code-toolbar>.toolbar {
-    position: absolute;
-    z-index: 10;
-    top: .3em;
-    right: .2em;
-    transition: opacity .3s ease-in-out;
-    opacity: 0
-}
-
-div.code-toolbar:hover>.toolbar {
-    opacity: 1
-}
-
-div.code-toolbar:focus-within>.toolbar {
-    opacity: 1
-}
-
-div.code-toolbar>.toolbar>.toolbar-item {
-    display: inline-block
-}
-
-div.code-toolbar>.toolbar>.toolbar-item>a {
-    cursor: pointer
-}
-
-div.code-toolbar>.toolbar>.toolbar-item>button {
-    background: 0 0;
-    border: 0;
-    color: inherit;
-    font: inherit;
-    line-height: normal;
-    overflow: visible;
-    padding: 0;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none
-}
-
-div.code-toolbar>.toolbar>.toolbar-item>a,
-div.code-toolbar>.toolbar>.toolbar-item>button,
-div.code-toolbar>.toolbar>.toolbar-item>span {
-    color: #bbb;
-    font-size: .8em;
-    padding: 0 .5em;
-    background: #f5f2f0;
-    background: rgba(224, 224, 224, .2);
-    box-shadow: 0 2px 0 0 rgba(0, 0, 0, .2);
-    border-radius: .5em
-}
-
-div.code-toolbar>.toolbar>.toolbar-item>a:focus,
-div.code-toolbar>.toolbar>.toolbar-item>a:hover,
-div.code-toolbar>.toolbar>.toolbar-item>button:focus,
-div.code-toolbar>.toolbar>.toolbar-item>button:hover,
-div.code-toolbar>.toolbar>.toolbar-item>span:focus,
-div.code-toolbar>.toolbar>.toolbar-item>span:hover {
-    color: inherit;
-    text-decoration: none
 }
