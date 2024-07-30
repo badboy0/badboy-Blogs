@@ -1161,3 +1161,16 @@ pre::after {
 #vcomments .vpower {
     padding-right: 1%;
 }
+
+img.vimg {
+    transition: all 0.5s
+        /* 旋转时间为 1s */
+}
+
+img.vimg:hover {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+}

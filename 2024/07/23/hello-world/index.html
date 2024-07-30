@@ -228,8 +228,18 @@
     
 </div>
 
-            
-                <div id="vcomments"></div>
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+        <div id="vcomments"></div>
 
 <script src="/js/lib/valine.min.js"></script>
 <script>
@@ -242,8 +252,8 @@
         serverURLs: 'https://ck3em6xx.lc-cn-n1-shared.com',
     });
 </script>
-                    
-            <footer id="footer">
+            
+    <footer id="footer">
     <div id="footer-wrap">
         <div>
             &copy;
@@ -261,16 +271,5 @@
     </div>
 </footer>
 
-        </div>
-        
-        <transition name="fade">
-            <div id="preview" ref="preview" v-show="previewShow">
-                <img id="preview-content" ref="previewContent" />
-            </div>
-        </transition>
-        
-    </div>
-    <script src="/js/main.js"></script>
-    
 </body>
 </html>

@@ -246,7 +246,7 @@
         
         <span class="tag">
             
-            <a href="/tags/qq/" style="color: #03a9f4">qq</a>
+            <a href="/tags/qq/" style="color: #ffa2c4">qq</a>
         </span>
         
     </div>
@@ -296,7 +296,7 @@ print(111111)
         
         <span class="tag">
             
-            <a href="/tags/A/" style="color: #00bcd4">A</a>
+            <a href="/tags/A/" style="color: #ff7d73">A</a>
         </span>
         
     </div>
@@ -444,8 +444,18 @@ print(111111)
     
 </div>
 
-            
-            <footer id="footer">
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    <footer id="footer">
     <div id="footer-wrap">
         <div>
             &copy;
@@ -463,16 +473,5 @@ print(111111)
     </div>
 </footer>
 
-        </div>
-        
-        <transition name="fade">
-            <div id="preview" ref="preview" v-show="previewShow">
-                <img id="preview-content" ref="previewContent" />
-            </div>
-        </transition>
-        
-    </div>
-    <script src="/js/main.js"></script>
-    
 </body>
 </html>

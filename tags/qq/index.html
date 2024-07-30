@@ -184,7 +184,7 @@
         
         
         <span>
-            <a href="/tags/A/" style="background: #03a9f4">
+            <a href="/tags/A/" style="background: #00bcd4">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -226,7 +226,7 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/qq/" style="color: #00a596">
+                        <a href="/tags/qq/" style="color: #00bcd4">
                             qq
                         </a>
                     </span>
@@ -239,8 +239,18 @@
     
 </div>
 
-            
-            <footer id="footer">
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    <footer id="footer">
     <div id="footer-wrap">
         <div>
             &copy;
@@ -258,16 +268,5 @@
     </div>
 </footer>
 
-        </div>
-        
-        <transition name="fade">
-            <div id="preview" ref="preview" v-show="previewShow">
-                <img id="preview-content" ref="previewContent" />
-            </div>
-        </transition>
-        
-    </div>
-    <script src="/js/main.js"></script>
-    
 </body>
 </html>

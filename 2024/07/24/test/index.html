@@ -208,7 +208,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/A/" style="color: #03a9f4">
+                <a href="/tags/A/" style="color: #00bcd4">
                     A
                 </a>
             </span>
@@ -240,8 +240,18 @@ print(111111)
     
 </div>
 
-            
-                <div id="vcomments"></div>
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+        <div id="vcomments"></div>
 
 <script src="/js/lib/valine.min.js"></script>
 <script>
@@ -254,8 +264,8 @@ print(111111)
         serverURLs: 'https://ck3em6xx.lc-cn-n1-shared.com',
     });
 </script>
-                    
-            <footer id="footer">
+            
+    <footer id="footer">
     <div id="footer-wrap">
         <div>
             &copy;
@@ -273,16 +283,5 @@ print(111111)
     </div>
 </footer>
 
-        </div>
-        
-        <transition name="fade">
-            <div id="preview" ref="preview" v-show="previewShow">
-                <img id="preview-content" ref="previewContent" />
-            </div>
-        </transition>
-        
-    </div>
-    <script src="/js/main.js"></script>
-    
 </body>
 </html>
