@@ -35,6 +35,9 @@
 <script src="/js/lib/preview.js"></script>
 
 
+<script src="https://s4.zstatic.net/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+<script src="/js/lib/crypto.js"></script>
+
 
 
 
@@ -202,23 +205,20 @@
         
     </div>
     
-    <div class="content" v-pre>
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><p>test</p>
-<h3 id="test-1"><a href="#test-1" class="headerlink" title="test"></a>test</h3><h5 id="test-2"><a href="#test-2" class="headerlink" title="test"></a>test</h5><h1 id="test-3"><a href="#test-3" class="headerlink" title="test"></a>test</h1><h1 id="test-4"><a href="#test-4" class="headerlink" title="test"></a>test</h1><h6 id="test-5"><a href="#test-5" class="headerlink" title="test"></a>test</h6><h1 id="test-6"><a href="#test-6" class="headerlink" title="test"></a>test</h1><h2 id="test-7"><a href="#test-7" class="headerlink" title="test"></a>test</h2><h3 id="test-8"><a href="#test-8" class="headerlink" title="test"></a>test</h3>
-    </div>
+    
+    <input
+        id="crypto"
+        :class="['input', cryptoStatus]"
+        :disabled="cryptoStatus === 'success'"
+        ref="crypto"
+        placeholder="文章被加密，请输入密码"
+        data-encrypted="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"
+        data-shasum="fa8d705ba3bc65d595a875a8df3eb7b560b77c416b6c8b78209692bfa243f519"
+        v-model="crypto"
+    />
+    <transition name="fade">
+        <div class="content" ref="content" v-show="cryptoStatus === 'success'"></div>
+    </transition>
     
     
     
