@@ -1162,6 +1162,11 @@ pre::after {
     padding-right: 1%;
 }
 
+/* .vpower.txt-right {
+    display: none;
+} */
+
+
 img.vimg {
     transition: all 0.5s
         /* 旋转时间为 1s */
