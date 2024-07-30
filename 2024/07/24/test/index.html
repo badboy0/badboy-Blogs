@@ -61,6 +61,13 @@
     style="position: fixed; bottom: 50px; right: 60px; font-size: 48px; cursor: pointer; z-index: 10; display: block; opacity: 1;">
     <a title="返回顶部">↑</a>
 </div>
+    
+    <div id="toc" class="toc-article">
+        <h3><i class="fas fa-stream"></i> 目录</h3>
+        <div class="toc-title"></div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#test"><span class="toc-number">1.</span> <span class="toc-text">test</span></a></li></ol>
+    </div>
+    
     <script src="/js/totop.js"></script>
     <script src="/js/funnytitle.js"></script>
     <script src="/js/zhizhuwang.js"></script>
@@ -70,6 +77,7 @@
 <meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="坏孩子のSimple Blogs" type="application/atom+xml">
 </head>
 <body>
+    <!--flag{H4ve_4_G00d_d4y!!!}-->
     <div id="layout">
         
         <div id="content-background" ref="contentBackground" data-images="/images/content-background.png"></div>
@@ -200,7 +208,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/A/" style="color: #00bcd4">
+                <a href="/tags/A/" style="color: #03a9f4">
                     A
                 </a>
             </span>
@@ -232,6 +240,21 @@ print(111111)
     
 </div>
 
+            
+                <div id="vcomments"></div>
+
+<script src="/js/lib/valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'cK3EM6xXJsj61hqqNmXWUQvx-gzGzoHsz',
+        appKey: '4dyJwl1epUYkWuXh5gyOnl7b',
+        visitor: 'true',
+        placeholder: '留下点什么',
+        serverURLs: 'https://ck3em6xx.lc-cn-n1-shared.com',
+    });
+</script>
+                    
             <footer id="footer">
     <div id="footer-wrap">
         <div>
@@ -260,12 +283,6 @@ print(111111)
         
     </div>
     <script src="/js/main.js"></script>
-    
-    
-
-
-
-
     
 </body>
 </html>
