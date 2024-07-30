@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>about | 坏孩子のSimple Blogs</title>
+    <title>About | 坏孩子のSimple Blogs</title>
     <meta name="author" content="坏孩子" />
     <meta name="description" content="「 尼采 」" />
     <meta name="keywords" content="" />
@@ -118,6 +118,11 @@
             <span>&ensp;Tags</span>
         </a>
         
+        <a href="/links">
+            <i class="fa-solid fa-link fa-fw"></i>
+            <span>&ensp;Links</span>
+        </a>
+        
     </nav>
     <nav id="mobile-menu">
         <div class="title" @click="showMenuItems = !showMenuItems">
@@ -172,6 +177,15 @@
                     </div>
                 </a>
                 
+                <a href="/links">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-link fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Links</div>
+                    </div>
+                </a>
+                
             </div>
         </transition>
     </nav>
@@ -183,7 +197,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>about</h1>
+        <h1>About</h1>
     </div>
     <div class="info">
         <span class="date">
