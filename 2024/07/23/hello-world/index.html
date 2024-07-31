@@ -35,9 +35,6 @@
 <script src="/js/lib/preview.js"></script>
 
 
-<script src="https://s4.zstatic.net/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
-<script src="/js/lib/crypto.js"></script>
-
 
 
 
@@ -219,20 +216,24 @@
         
     </div>
     
-    
-    <input
-        id="crypto"
-        :class="['input', cryptoStatus]"
-        :disabled="cryptoStatus === 'success'"
-        ref="crypto"
-        placeholder="文章被加密，请输入密码"
-        data-encrypted="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"
-        data-shasum="fa8d705ba3bc65d595a875a8df3eb7b560b77c416b6c8b78209692bfa243f519"
-        v-model="crypto"
-    />
-    <transition name="fade">
-        <div class="content" ref="content" v-show="cryptoStatus === 'success'"></div>
-    </transition>
+    <div class="content" v-pre>
+        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
+</code></pre>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
+</code></pre>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
+</code></pre>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
+</code></pre>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><p>test</p>
+<h3 id="test-1"><a href="#test-1" class="headerlink" title="test"></a>test</h3><h5 id="test-2"><a href="#test-2" class="headerlink" title="test"></a>test</h5><h1 id="test-3"><a href="#test-3" class="headerlink" title="test"></a>test</h1><h1 id="test-4"><a href="#test-4" class="headerlink" title="test"></a>test</h1><h6 id="test-5"><a href="#test-5" class="headerlink" title="test"></a>test</h6><h1 id="test-6"><a href="#test-6" class="headerlink" title="test"></a>test</h1><h2 id="test-7"><a href="#test-7" class="headerlink" title="test"></a>test</h2><h3 id="test-8"><a href="#test-8" class="headerlink" title="test"></a>test</h3>
+    </div>
     
     
     
