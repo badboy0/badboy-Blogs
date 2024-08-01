@@ -13,6 +13,19 @@
     />
     <link rel="icon" href="/images/avatar.jpg" />
     <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/libs/codeBlock/codeBlockFunction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/js/libs/codeBlock/codeLang.js"></script>
+
+<!-- 代码块复制 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/libs/codeBlock/codeCopy.js"></script>
+
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/js/libs/codeBlock/codeShrink.js"></script>
+
+<!-- 代码块折行 -->
+<style type="text/css">code[class*="language-"],pre[class*="language-"] {white-space: pre !important; }</style>
     <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
 <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -42,19 +55,6 @@
 
 <link rel="stylesheet" href="/css/main.css" />
 
-    <script type="text/javascript" src="/js/libs/codeBlock/codeBlockFunction.js"></script>
-<!-- 代码语言 -->
-<script type="text/javascript" src="/js/libs/codeBlock/codeLang.js"></script>
-
-<!-- 代码块复制 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
-<script type="text/javascript" src="/js/libs/codeBlock/codeCopy.js"></script>
-
-<!-- 代码块收缩 -->
-<script type="text/javascript" src="/js/libs/codeBlock/codeShrink.js"></script>
-
-<!-- 代码块折行 -->
-<style type="text/css">code[class*="language-"],pre[class*="language-"] {white-space: pre !important; }</style>
     <div id="totop"
     style="position: fixed; bottom: 50px; right: 60px; font-size: 48px; cursor: pointer; z-index: 10; display: block; opacity: 1;">
     <a title="返回顶部">↑</a>
@@ -66,7 +66,7 @@
     <script src="/js/link.js"></script>
     
 
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="坏孩子のSimple Blogs" type="application/atom+xml">
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="坏孩子のSimple Blogs" type="application/atom+xml">
 </head>
 <body>
     <!--flag{H4ve_4_G00d_d4y!!!}-->
@@ -235,7 +235,10 @@
     <div class="description">
         <div class="content" v-pre>
             
-            
+            <pre><code class="highlight python"><span class="built_in">print</span>(<span class="number">1</span>)
+<span class="built_in">print</span>(<span class="number">2</span>)</code></pre>
+
+
             
         </div>
     </div>
@@ -363,7 +366,7 @@
         <div style="margin-top: 15px;margin-left: 10px;text-align: left;line-height: 30px;font-size: 15px">
             <span id="TotalArtical">文章总数：3</span>
             <br>
-            <span id="TotalArtical">本站总字数：77</span>
+            <span id="TotalArtical">本站总字数：80</span>
             <br>
             <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
             <script>
