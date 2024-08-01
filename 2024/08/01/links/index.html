@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Archives | 坏孩子のSimple Blogs</title>
+    <title>links | 坏孩子のSimple Blogs</title>
     <meta name="author" content="坏孩子" />
     <meta name="description" content="「 尼采 」" />
     <meta name="keywords" content="" />
@@ -36,7 +36,9 @@
 
 
 
-<script src="/js/lib/search.js"></script>
+
+
+
 
 
 
@@ -59,6 +61,12 @@
     style="position: fixed; bottom: 50px; right: 60px; font-size: 48px; cursor: pointer; z-index: 10; display: block; opacity: 1;">
     <a title="返回顶部">↑</a>
 </div>
+    
+    <div id="toc" class="toc-article">
+        <h3><i class="fas fa-stream"></i> 目录</h3>
+        <div class="toc-title"></div>
+        
+    </div>
     
     <script src="/js/totop.js"></script>
     <script src="/js/funnytitle.js"></script>
@@ -193,56 +201,31 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            
-<div id="archives">
-    
-    <input id="search-bar" class="input" placeholder="搜索" v-model="rawSearch" />
-    
-    <div id="timeline-wrap" ref="timeline">
+            <div class="article">
+    <div>
+        <h1>links</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/8/1
+        </span>
         
-        <div class="timeline" data-title="helloworld">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/7/23</div>
-                <a href="/2024/07/23/hello-world/">
-                    <h3>Hello World</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="links">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/8/1</div>
-                <a href="/2024/08/01/links/">
-                    <h3>links</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="link">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/8/1</div>
-                <a href="/2024/08/01/link/">
-                    <h3>link</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
         
     </div>
+    
+    <div class="content" v-pre>
+        
+    </div>
+    
+    
+    
+    
+    
+    
+    
 </div>
 
         </div>
@@ -256,6 +239,20 @@
     </div>
     <script src="/js/main.js"></script>
     
+        <div id="vcomments"></div>
+
+<script src="/js/lib/valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: 'cK3EM6xXJsj61hqqNmXWUQvx-gzGzoHsz',
+        app_key: '4dyJwl1epUYkWuXh5gyOnl7b',
+        visitor: 'true',
+        placeholder: '留下点什么',
+        serverURLs: 'https://ck3em6xx.lc-cn-n1-shared.com',
+    });
+</script>
+            
     <footer id="footer">
     <div id="footer-wrap">
         <div>
