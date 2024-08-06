@@ -1,9 +1,10 @@
-http://example.com/2024/08/01/link/
 http://example.com/2024/07/23/hello-world/
 http://example.com/links/index.html
-http://example.com/2024/08/01/links/
 http://example.com/about/index.html
 http://example.com/categories/index.html
 http://example.com/tags/index.html
 http://example.com/archives/index.html
 http://example.com/
+http://example.com/tags/php/
+http://example.com/tags/cve/
+http://example.com/tags/python/

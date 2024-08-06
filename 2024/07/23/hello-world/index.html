@@ -13,19 +13,6 @@
     />
     <link rel="icon" href="/images/avatar.jpg" />
     <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/libs/codeBlock/codeBlockFunction.js"></script>
-<!-- 代码语言 -->
-<script type="text/javascript" src="/js/libs/codeBlock/codeLang.js"></script>
-
-<!-- 代码块复制 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
-<script type="text/javascript" src="/js/libs/codeBlock/codeCopy.js"></script>
-
-<!-- 代码块收缩 -->
-<script type="text/javascript" src="/js/libs/codeBlock/codeShrink.js"></script>
-
-<!-- 代码块折行 -->
-<style type="text/css">code[class*="language-"],pre[class*="language-"] {white-space: pre !important; }</style>
     <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
 <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -57,6 +44,19 @@
 
 <link rel="stylesheet" href="/css/main.css" />
 
+    <script type="text/javascript" src="/js/libs/codeBlock/codeBlockFunction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/js/libs/codeBlock/codeLang.js"></script>
+
+<!-- 代码块复制 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/libs/codeBlock/codeCopy.js"></script>
+
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/js/libs/codeBlock/codeShrink.js"></script>
+
+<!-- 代码块折行 -->
+<style type="text/css">code[class*="language-"],pre[class*="language-"] {white-space: pre !important; }</style>
     <div id="totop"
     style="position: fixed; bottom: 50px; right: 60px; font-size: 48px; cursor: pointer; z-index: 10; display: block; opacity: 1;">
     <a title="返回顶部">↑</a>
@@ -214,6 +214,35 @@
         </span>
         
         
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/php/" style="color: #00a596">
+                    php
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/cve/" style="color: #03a9f4">
+                    cve
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/python/" style="color: #00bcd4">
+                    python
+                </a>
+            </span>
+            
+        </span>
+        
     </div>
     
     <div class="content" v-pre>
@@ -222,7 +251,8 @@
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="highlight bash">$ hexo new <span class="string">&quot;My New Post&quot;</span></code></pre>
 
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="highlight python"><span class="built_in">print</span>(<span class="number">1</span>)</code></pre>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="highlight python"><span class="built_in">print</span>(<span class="number">1</span>)
+<span class="built_in">print</span>(<span class="number">2</span>)</code></pre>
 
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
 <h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="highlight bash">$ hexo generate</code></pre>
