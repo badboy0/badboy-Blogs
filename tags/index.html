@@ -38,10 +38,6 @@
 
 
 
-
-
-
-
 <link rel="stylesheet" href="/css/main.css" />
 
     <script type="text/javascript" src="/js/libs/codeBlock/codeBlockFunction.js"></script>
@@ -195,30 +191,45 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>tags</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/7/25
+            <div id="archives">
+    
+    <div class="categories-tags">
+        
+        
+        
+        <span>
+            <a href="/tags/php/" style="background: #ffa2c4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                php
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/python/" style="background: #ff7d73">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                python
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/cve/" style="background: #03a9f4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                cve
+            </a>
         </span>
         
         
     </div>
-    
-    <div class="content" v-pre>
-        
-    </div>
-    
-    
-    
-    
-    
-    
     
 </div>
 
@@ -233,20 +244,6 @@
     </div>
     <script src="/js/main.js"></script>
     
-        <div id="vcomments"></div>
-
-<script src="/js/lib/valine.min.js"></script>
-<script>
-    new Valine({
-        el: '#vcomments',
-        app_id: 'cK3EM6xXJsj61hqqNmXWUQvx-gzGzoHsz',
-        app_key: '4dyJwl1epUYkWuXh5gyOnl7b',
-        visitor: 'true',
-        placeholder: '留下点什么',
-        serverURLs: 'https://ck3em6xx.lc-cn-n1-shared.com',
-    });
-</script>
-            
     <footer id="footer">
     <div id="footer-wrap">
         <div>
