@@ -64,7 +64,20 @@
     <script src="/js/funnytitle.js"></script>
     <script src="/js/zhizhuwang.js"></script>
     <script src="/js/link.js"></script>
-    
+    <div class="xpand" style="height:200px; position: fixed; bottom: 0; left: 0; z-index: 9999;">
+    <canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;opacity: 0.5;pointer-events: none;">
+</canvas></div>
+<script src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/twopeople1.js"></script>
+<script src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/zdog.dist.js"></script>
+<script id="rendered-js" src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/twopeople.js"></script>
+<style>
+    canvas {
+        display: block;
+        margin: auto auto;
+        cursor: move;
+    }
+</style>
+
 
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="坏孩子のSimple Blogs" type="application/atom+xml">
 </head>
@@ -118,7 +131,7 @@
         
         <a href="/links">
             <i class="fa-solid fa-link fa-fw"></i>
-            <span>&ensp;Links</span>
+            <span>&ensp;links</span>
         </a>
         
     </nav>
@@ -180,7 +193,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-link fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Links</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">links</div>
                     </div>
                 </a>
                 
@@ -194,7 +207,7 @@
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div id="home-head">
-    <div id="home-background" ref="homeBackground" data-images="/images/home-background.jpg,/images/home-background2.jpg,/images/home-background3.png,/images/home-background4.jpg"></div>
+    <div id="home-background" ref="homeBackground" data-images="/images/home-background.jpg,/images/home-background2.jpg,/images/home-background3.png,/images/home-background4.jpg,/images/wanshang.png,/images/baitian.png"></div>
     <div id="home-info" @click="homeClick">
         <span class="loop"></span>
         <span class="loop"></span>
@@ -203,8 +216,34 @@
         <span class="info">
             <div class="wrap">
                 <h1>坏孩子のSimple Blogs</h1>
-                <h4>每一个不曾起舞的日子都是对生命的辜负。</h3>
-                <h5>「 尼采 」</h5>
+                <!-- <h4>每一个不曾起舞的日子都是对生命的辜负。</h3>
+                <h5>「 尼采 」</h5> -->
+                <h4 id="hitokoto"><span id="hitokoto_text">:D 获取中...</span></h4>
+                <div id="info" style="font-size: larger;"></div>
+                <script>
+                    window.onload = function () {
+                        var hitokoto = document.getElementById("hitokoto_text");
+                        var info = document.getElementById("info");
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('get', 'https://v1.hitokoto.cn/?encode=json&charset=utf-8&c=a&c=b&c=c&c=d&c=f&c=i&c=k', true);
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                var data = JSON.parse(xhr.responseText);
+                                hitokoto.innerText = data.hitokoto;
+                                if (data.from_who) {
+                                    info.innerText = data.from_who + ' · ' + data.from;
+                                } else {
+                                    info.innerText = '「 ' + data.from + ' 」';
+                                }
+                            } else {
+                                hitokoto.innerText = '每一个不曾起舞的日子都是对生命的辜负。';
+                                info.innerText= '「 尼采 」';
+                            }
+                        };
+                        xhr.send();
+                    };
+                </script>
+                <h6></h6>
             </div>
         </span>
     </div>
@@ -258,7 +297,7 @@
         
         <span class="tag">
             
-            <a href="/tags/php/" style="color: #00a596">php</a>
+            <a href="/tags/php/" style="color: #ffa2c4">php</a>
         </span>
         
         <span class="tag">
@@ -311,7 +350,7 @@
         
         <span class="tag">
             
-            <a href="/tags/php/" style="color: #ffa2c4">php</a>
+            <a href="/tags/php/" style="color: #03a9f4">php</a>
         </span>
         
         <span class="tag">
@@ -321,7 +360,7 @@
         
         <span class="tag">
             
-            <a href="/tags/cve/" style="color: #00a596">cve</a>
+            <a href="/tags/cve/" style="color: #03a9f4">cve</a>
         </span>
         
     </div>
@@ -353,11 +392,35 @@
 
         </div>
         
+        <div class="icon-links">
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://github.com/badboy0">
+                    <i
+                        class="fa-brands fa-github fa-fw"
+                    ></i>
+                </a>
+            </span>
+            
+        </div>
+        
         
         <div class="friend-links">
             
             <div class="friend-link">
-                <a target="_blank" rel="noopener" href="https://github.com/badboy0/">github</a>
+                <a target="_blank" rel="noopener" href="https://www.google.com/">Google</a>
+            </div>
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://fofa.info/">FOFA</a>
+            </div>
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://hunter.qianxin.com/">HUNTER</a>
+            </div>
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://x.threatbook.com/">微步</a>
             </div>
             
         </div>
@@ -370,7 +433,7 @@
         <div id="card-div">
         <span style="font-size: 20px; text-align: center;"><i class="fas fa-bullhorn fa-shake"></i> 公告</span>
         <div class="announcement_content">
-            <p>test<br>建设中…</p>
+            <p>[+] 欢迎来到坏孩子的世界~<br>建设中…</p>
 
         </div>
         </div>
@@ -420,7 +483,6 @@
         </div>
     </div>
 </div>
-
     </div>
     
 </div>
