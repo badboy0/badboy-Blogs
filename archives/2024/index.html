@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>test2 | 坏孩子のSimple Blogs</title>
+    <title>Archives | 坏孩子のSimple Blogs</title>
     <meta name="author" content="坏孩子" />
     <meta name="description" content="「 尼采 」" />
     <meta name="keywords" content="" />
@@ -27,51 +27,27 @@
 <script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
 
 
-<script src="/js/lib/prism.js"></script>
-<link rel="stylesheet" href="/css/prism.css" rel="stylesheet" />
-
+    <script src="https://cdn.staticfile.org/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.staticfile.org/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/11.9.0/styles/github.min.css" />
+    <script src="/js/lib/highlight.js"></script>
+    
 
 
 <script src="/js/lib/preview.js"></script>
 
 
 
-
-
-
+<script src="/js/lib/search.js"></script>
 
 
 
 <link rel="stylesheet" href="/css/main.css" />
 
-    <script type="text/javascript" src="/js/libs/codeBlock/codeBlockFunction.js"></script>
-<!-- 代码语言 -->
-<script type="text/javascript" src="/js/libs/codeBlock/codeLang.js"></script>
-
-<!-- 代码块复制 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
-<script type="text/javascript" src="/js/libs/codeBlock/codeCopy.js"></script>
-
-<!-- 代码块收缩 -->
-<script type="text/javascript" src="/js/libs/codeBlock/codeShrink.js"></script>
-
-<!-- 代码块折行 -->
-<style type="text/css">code[class*="language-"],pre[class*="language-"] {white-space: pre !important; }</style>
     <div id="totop"
     style="position: fixed; bottom: 50px; right: 60px; font-size: 48px; cursor: pointer; z-index: 10; display: block; opacity: 1;">
     <a title="返回顶部">↑</a>
 </div>
-    
-    <div id="toc" class="toc-article">
-        <h3><i class="fas fa-stream"></i> 目录</h3>
-        <div class="toc-title"></div>
-        
-    </div>
-    
-    <script src="/js/totop.js"></script>
-    <script src="/js/funnytitle.js"></script>
-    <script src="/js/zhizhuwang.js"></script>
-    <script src="/js/link.js"></script>
     <div class="xpand" style="height:200px; position: fixed; bottom: 0; left: 0; z-index: 9999;">
     <canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;opacity: 0.5;pointer-events: none;">
 </canvas></div>
@@ -86,11 +62,15 @@
     }
 </style>
 
-
+    
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="坏孩子のSimple Blogs" type="application/atom+xml">
 </head>
 <body>
     <!--flag{H4ve_4_G00d_d4y!!!}-->
+    <script src="/js/totop.js"></script>
+    <script src="/js/funnytitle.js"></script>
+    <script src="/js/zhizhuwang.js"></script>
+    <script src="/js/link.js"></script>
     <div id="layout">
         
         <div id="content-background" ref="contentBackground" data-images="/images/content-background.png"></div>
@@ -214,62 +194,81 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>test2</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/8/6
-        </span>
-        
-        <span class="category">
-            <a href="/categories/test2/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                test2
-            </a>
-        </span>
-        
-        
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
             
-            
-            <span class="tag">
-                
-                <a href="/tags/php/" style="color: #00a596">
-                    php
+<div id="archives">
+    
+    <input id="search-bar" class="input" placeholder="搜索" v-model="rawSearch" />
+    
+    <h4>Total 2</h4>
+    <div id="timeline-wrap" ref="timeline">
+        
+        <div class="timeline" data-title="helloworld">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2024/7/23</div>
+                <a href="/2024/07/23/hello-world/">
+                    <h3>Hello World</h3>
                 </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/python/" style="color: #00bcd4">
-                    python
+                <div class="info">
+                    
+                    <span class="category">
+                        <a href="/categories/test/">
+                            <span class="icon">
+                                <i class="fa-solid fa-bookmark fa-fw"></i>
+                            </span>
+                            test
+                        </a>
+                    </span>
+                    
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </span>
+                        
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/php/" style="color: #ffa2c4">
+                                php
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/cve/" style="color: #03a9f4">
+                                cve
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/python/" style="color: #00a596">
+                                python
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline" data-title="test2">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2024/8/7</div>
+                <a href="/2024/08/07/test2/">
+                    <h3>test2</h3>
                 </a>
-            </span>
-            
-        </span>
+                <div class="info">
+                    
+                    
+                </div>
+            </div>
+        </div>
         
     </div>
-    
-    <div class="content" v-pre>
-        
-    </div>
-    
-    
-    
-    
-    
-    
-    
 </div>
 
         </div>
@@ -283,20 +282,6 @@
     </div>
     <script src="/js/main.js"></script>
     
-        <div id="vcomments"></div>
-
-<script src="/js/lib/valine.min.js"></script>
-<script>
-    new Valine({
-        el: '#vcomments',
-        app_id: 'cK3EM6xXJsj61hqqNmXWUQvx-gzGzoHsz',
-        app_key: '4dyJwl1epUYkWuXh5gyOnl7b',
-        visitor: 'true',
-        placeholder: '留下点什么',
-        serverURLs: 'https://ck3em6xx.lc-cn-n1-shared.com',
-    });
-</script>
-            
     <footer id="footer">
     <div id="footer-wrap">
         <div>

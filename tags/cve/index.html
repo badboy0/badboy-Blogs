@@ -27,9 +27,11 @@
 <script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
 
 
-<script src="/js/lib/prism.js"></script>
-<link rel="stylesheet" href="/css/prism.css" rel="stylesheet" />
-
+    <script src="https://cdn.staticfile.org/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.staticfile.org/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/11.9.0/styles/github.min.css" />
+    <script src="/js/lib/highlight.js"></script>
+    
 
 
 <script src="/js/lib/preview.js"></script>
@@ -40,28 +42,10 @@
 
 <link rel="stylesheet" href="/css/main.css" />
 
-    <script type="text/javascript" src="/js/libs/codeBlock/codeBlockFunction.js"></script>
-<!-- 代码语言 -->
-<script type="text/javascript" src="/js/libs/codeBlock/codeLang.js"></script>
-
-<!-- 代码块复制 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
-<script type="text/javascript" src="/js/libs/codeBlock/codeCopy.js"></script>
-
-<!-- 代码块收缩 -->
-<script type="text/javascript" src="/js/libs/codeBlock/codeShrink.js"></script>
-
-<!-- 代码块折行 -->
-<style type="text/css">code[class*="language-"],pre[class*="language-"] {white-space: pre !important; }</style>
     <div id="totop"
     style="position: fixed; bottom: 50px; right: 60px; font-size: 48px; cursor: pointer; z-index: 10; display: block; opacity: 1;">
     <a title="返回顶部">↑</a>
 </div>
-    
-    <script src="/js/totop.js"></script>
-    <script src="/js/funnytitle.js"></script>
-    <script src="/js/zhizhuwang.js"></script>
-    <script src="/js/link.js"></script>
     <div class="xpand" style="height:200px; position: fixed; bottom: 0; left: 0; z-index: 9999;">
     <canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;opacity: 0.5;pointer-events: none;">
 </canvas></div>
@@ -76,11 +60,15 @@
     }
 </style>
 
-
+    
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="坏孩子のSimple Blogs" type="application/atom+xml">
 </head>
 <body>
     <!--flag{H4ve_4_G00d_d4y!!!}-->
+    <script src="/js/totop.js"></script>
+    <script src="/js/funnytitle.js"></script>
+    <script src="/js/zhizhuwang.js"></script>
+    <script src="/js/link.js"></script>
     <div id="layout">
         
         <div id="content-background" ref="contentBackground" data-images="/images/content-background.png"></div>
@@ -211,24 +199,12 @@
         
         
         <span>
-            <a href="/tags/php/" style="background: #ff7d73">
+            <a href="/tags/php/" style="background: #ffa2c4">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
                 php
-                <span class="count">2</span>
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/python/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                python
-                <span class="count">2</span>
+                <span class="count">1</span>
             </a>
         </span>
         
@@ -245,6 +221,18 @@
         </span>
         
         
+        
+        
+        
+        <span>
+            <a href="/tags/python/" style="background: #ff7d73">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                python
+                <span class="count">1</span>
+            </a>
+        </span>
         
         
     </div>
@@ -276,15 +264,8 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/php/" style="color: #00a596">
+                        <a href="/tags/php/" style="color: #ffa2c4">
                             php
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/python/" style="color: #ffa2c4">
-                            python
                         </a>
                     </span>
                     
@@ -292,6 +273,13 @@
                         
                         <a href="/tags/cve/" style="color: #ff7d73">
                             cve
+                        </a>
+                    </span>
+                    
+                    <span class="tag">
+                        
+                        <a href="/tags/python/" style="color: #00a596">
+                            python
                         </a>
                     </span>
                     

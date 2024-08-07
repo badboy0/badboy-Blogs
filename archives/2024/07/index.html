@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>About | 坏孩子のSimple Blogs</title>
+    <title>Archives | 坏孩子のSimple Blogs</title>
     <meta name="author" content="坏孩子" />
     <meta name="description" content="「 尼采 」" />
     <meta name="keywords" content="" />
@@ -38,9 +38,7 @@
 
 
 
-
-
-
+<script src="/js/lib/search.js"></script>
 
 
 
@@ -196,42 +194,81 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>About</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/7/25
-        </span>
+            
+<div id="archives">
+    
+    <input id="search-bar" class="input" placeholder="搜索" v-model="rawSearch" />
+    
+    <h4>Total 2</h4>
+    <div id="timeline-wrap" ref="timeline">
         
+        <div class="timeline" data-title="helloworld">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2024/7/23</div>
+                <a href="/2024/07/23/hello-world/">
+                    <h3>Hello World</h3>
+                </a>
+                <div class="info">
+                    
+                    <span class="category">
+                        <a href="/categories/test/">
+                            <span class="icon">
+                                <i class="fa-solid fa-bookmark fa-fw"></i>
+                            </span>
+                            test
+                        </a>
+                    </span>
+                    
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </span>
+                        
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/php/" style="color: #ffa2c4">
+                                php
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/cve/" style="color: #00bcd4">
+                                cve
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/python/" style="color: #00a596">
+                                python
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline" data-title="test2">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2024/8/7</div>
+                <a href="/2024/08/07/test2/">
+                    <h3>test2</h3>
+                </a>
+                <div class="info">
+                    
+                    
+                </div>
+            </div>
+        </div>
         
     </div>
-    
-    <div class="content" v-pre>
-        <img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408062246217.jpg" style="zoom: 33%;" />
-
-
-
-<p>ID：坏孩子   badboy   badboy0</p>
-<p>Master：Web安全、内网渗透、代码审计…</p>
-<p>Contact：</p>
-<div class="qq" style="display: none;">QQ Vm0xMGEwNUdWWGhWYmtwT1ZteHdVRll3Vm1GWlZuQllaRWRHVmxKc1dubFdNalZMVlVaV1ZVMUVhejA9</div></li>
-
-<p>Team： Blackmanba</p>
-<hr>
-
-    </div>
-    
-    
-    
-    
-    
-    
-    
 </div>
 
         </div>
@@ -245,20 +282,6 @@
     </div>
     <script src="/js/main.js"></script>
     
-        <div id="vcomments"></div>
-
-<script src="/js/lib/valine.min.js"></script>
-<script>
-    new Valine({
-        el: '#vcomments',
-        app_id: 'cK3EM6xXJsj61hqqNmXWUQvx-gzGzoHsz',
-        app_key: '4dyJwl1epUYkWuXh5gyOnl7b',
-        visitor: 'true',
-        placeholder: '留下点什么',
-        serverURLs: 'https://ck3em6xx.lc-cn-n1-shared.com',
-    });
-</script>
-            
     <footer id="footer">
     <div id="footer-wrap">
         <div>
