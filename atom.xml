@@ -54,9 +54,9 @@
     
     <category term="php" scheme="http://example.com/tags/php/"/>
     
-    <category term="python" scheme="http://example.com/tags/python/"/>
-    
     <category term="cve" scheme="http://example.com/tags/cve/"/>
+    
+    <category term="python" scheme="http://example.com/tags/python/"/>
     
   </entry>
   

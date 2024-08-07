@@ -7,7 +7,7 @@ http://example.com/2024/07/23/hello-world/
 http://example.com/archives/index.html
 http://example.com/
 http://example.com/tags/php/
-http://example.com/tags/python/
 http://example.com/tags/cve/
-http://example.com/categories/test2/
+http://example.com/tags/python/
 http://example.com/categories/test/
+http://example.com/categories/test2/
