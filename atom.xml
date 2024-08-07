@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-08-07T07:59:07.843Z</updated>
+  <updated>2024-08-06T01:16:28.220Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,30 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>test2</title>
-    <link href="http://example.com/2024/08/07/ReadMe/"/>
-    <id>http://example.com/2024/08/07/ReadMe/</id>
-    <published>2024-08-07T07:28:56.000Z</published>
-    <updated>2024-08-07T07:59:07.843Z</updated>
-    
-    <content type="html"><![CDATA[<pre><code class="python">import requestsprint(Hello！)</code></pre><p>非常感谢云流师傅的帮助喜欢魔改博客。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;import requests
-print(Hello！)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;非常感谢云流师傅的帮助喜欢魔改博客。&lt;/p&gt;
-</summary>
-      
-    
-    
-    
-    
-  </entry>
   
   <entry>
     <title>Hello World</title>
