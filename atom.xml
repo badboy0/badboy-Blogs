@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-08-06T01:16:28.220Z</updated>
+  <updated>2024-08-12T14:40:08.772Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,27 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://example.com/2024/07/23/hello-world/"/>
-    <id>http://example.com/2024/07/23/hello-world/</id>
-    <published>2024-07-23T14:24:06.830Z</published>
-    <updated>2024-08-06T01:16:28.220Z</updated>
+    <title>AWD_tool开发</title>
+    <link href="http://example.com/2024/08/12/AWD-tool%E5%BC%80%E5%8F%91/"/>
+    <id>http://example.com/2024/08/12/AWD-tool%E5%BC%80%E5%8F%91/</id>
+    <published>2024-08-12T14:17:45.000Z</published>
+    <updated>2024-08-12T14:40:08.772Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><span id="more"></span><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;</code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="python">print(1)print(2)</code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p><h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><p>test</p><h3 id="test-1"><a href="#test-1" class="headerlink" title="test"></a>test</h3><h5 id="test-2"><a href="#test-2" class="headerlink" title="test"></a>test</h5><h1 id="test-3"><a href="#test-3" class="headerlink" title="test"></a>test</h1><h1 id="test-4"><a href="#test-4" class="headerlink" title="test"></a>test</h1><h6 id="test-5"><a href="#test-5" class="headerlink" title="test"></a>test</h6><h1 id="test-6"><a href="#test-6" class="headerlink" title="test"></a>test</h1><h2 id="test-7"><a href="#test-7" class="headerlink" title="test"></a>test</h2><h3 id="test-8"><a href="#test-8" class="headerlink" title="test"></a>test</h3>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;</summary>
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>针对AWD比赛，从各种情景和需求所开发的自动化集成工具。后续会一直更新和完善……</p><p>目前可满足的功能：目标生成、扫描，原始后门利用，批量命令执行，木马升级(可支持四种马)，批量ssh操作，一键危险函数检测，文件备份，文件监控，日志监控等等。</p><h2 id="一、扫描模块"><a href="#一、扫描模块" class="headerlink" title="一、扫描模块"></a>一、扫描模块</h2><p>如果已知靶机地址，即不需要扫描，按任意键只生成地址即可。 </p><p>如靶机地址为 <span id="more"></span>192.168.0.100-255 的80端口，在 ip.txt 中会生成对应地址。</p><p>如果未知靶机地址，需要借助 fscan.exe 来扫描(已集成于工具无需配置)，在 ip.txt 中可得到扫描结果，可以在 fscan.py 中修改匹配规则，只获取80端口开放情况。</p><h2 id="二、攻击模块"><a href="#二、攻击模块" class="headerlink" title="二、攻击模块"></a>二、攻击模块</h2>]]></content>
     
     
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;针对AWD比赛，从各种情景和需求所开发的自动化集成工具。后续会一直更新和完善……&lt;/p&gt;
+&lt;p&gt;目前可满足的功能：目标生成、扫描，原始后门利用，批量命令执行，木马升级(可支持四种马)，批量ssh操作，一键危险函数检测，文件备份，文件监控，日志监控等等。&lt;/p&gt;
+&lt;h2 id=&quot;一、扫描模块&quot;&gt;&lt;a href=&quot;#一、扫描模块&quot; class=&quot;headerlink&quot; title=&quot;一、扫描模块&quot;&gt;&lt;/a&gt;一、扫描模块&lt;/h2&gt;&lt;p&gt;如果已知靶机地址，即不需要扫描，按任意键只生成地址即可。 &lt;/p&gt;
+&lt;p&gt;如靶机地址为</summary>
     
-    <category term="test" scheme="http://example.com/categories/test/"/>
     
     
-    <category term="php" scheme="http://example.com/tags/php/"/>
+    <category term="WEB" scheme="http://example.com/categories/WEB/"/>
     
-    <category term="cve" scheme="http://example.com/tags/cve/"/>
+    <category term="项目" scheme="http://example.com/categories/WEB/%E9%A1%B9%E7%9B%AE/"/>
     
-    <category term="python" scheme="http://example.com/tags/python/"/>
+    <category term="AWD" scheme="http://example.com/categories/WEB/%E9%A1%B9%E7%9B%AE/AWD/"/>
+    
+    
+    <category term="awd" scheme="http://example.com/tags/awd/"/>
+    
+    <category term="自动化" scheme="http://example.com/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
     
   </entry>
   

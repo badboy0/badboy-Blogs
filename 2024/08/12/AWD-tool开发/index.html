@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Tags: python | 坏孩子のSimple Blogs</title>
+    <title>AWD_tool开发 | 坏孩子のSimple Blogs</title>
     <meta name="author" content="坏孩子" />
     <meta name="description" content="「 尼采 」" />
     <meta name="keywords" content="" />
@@ -39,6 +39,13 @@
 <script src="/js/lib/preview.js"></script>
 
 
+<script src="https://s4.zstatic.net/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+<script src="/js/lib/crypto.js"></script>
+
+
+
+
+
 
 
 
@@ -62,6 +69,12 @@
     }
 </style>
 
+    
+    <div id="toc" class="toc-article">
+        <h3><i class="fas fa-stream"></i> 目录</h3>
+        <div class="toc-title"></div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%89%AB%E6%8F%8F%E6%A8%A1%E5%9D%97"><span class="toc-number">1.1.</span> <span class="toc-text">一、扫描模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%94%BB%E5%87%BB%E6%A8%A1%E5%9D%97"><span class="toc-number">1.2.</span> <span class="toc-text">二、攻击模块</span></a></li></ol></li></ol>
+    </div>
     
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="坏孩子のSimple Blogs" type="application/atom+xml">
 </head>
@@ -194,102 +207,72 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
+            <div class="article">
+    <div>
+        <h1>AWD_tool开发</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/8/12
+        </span>
         
-        
-        
-        <span>
-            <a href="/tags/php/" style="background: #00bcd4">
+        <span class="category">
+            <a href="/categories/WEB/">
                 <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                php
-                <span class="count">1</span>
+                WEB
             </a>
         </span>
         
         
-        
-        <span>
-            <a href="/tags/cve/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                cve
-                <span class="count">1</span>
-            </a>
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/awd/" style="color: #00a596">
+                    awd
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="color: #03a9f4">
+                    自动化
+                </a>
+            </span>
+            
         </span>
-        
-        
-        
-        <span>
-            <a href="/tags/python/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                python
-                <span class="count">1</span>
-            </a>
-        </span>
-        
-        
-        
         
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2024/7/23</div>
-            <a href="/2024/07/23/hello-world/">
-                <h3>Hello World</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/test/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        test
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/php/" style="color: #ff7d73">
-                            php
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/cve/" style="color: #00bcd4">
-                            cve
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/python/" style="color: #03a9f4">
-                            python
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
+    
+    <input
+        id="crypto"
+        :class="['input', cryptoStatus]"
+        :disabled="cryptoStatus === 'success'"
+        ref="crypto"
+        placeholder="文章被加密，请输入密码"
+        data-encrypted="U2FsdGVkX1+DP9aZDfdUos0p0cuF09YJtodQMVxb1xvLohtXZSlze5C/ovIXXCikBb8ySjIyeszk87QlhclZIlttYbx8ZnbU95X0px3hfQHk12CcBIvm7Y8+uyCOXacnjd9/MAN419aOIpvIJcl6pVjLq63oqUc4rOHuEcABtJzIzdn969IdjEf55GpdjCxC+BGjAA+MezbEyvzQCRHgiuPcN72kqUoGa69nqJi6ZcLzDWuD3sXTMbOMJnP0KNDYD+Vyu8nxcxozCHvSafwJcgZ4Rt9nd6v8uxIzvlIkInMwUCCJZ1F6eSx5BPT7oSwgOKG+iw7XaeboaYjoEjJX0KLgzjFv+TUVITBs2Oe13COD8CGn+gzweCJaTXAEOg/k5ti4vYj14TkkuaW8gvLAip9/jrcMykOyO15hZ5Fm8yoVOiCPkCTFAtEnJI7QHpmTHCAgaph8GckyBZPu2ISCJk9a3vvL1j+LHOHF+hzjjJM7Eexhf9vqQg7R5rHDJJsOCYfqOQvZGxx/uWqEAOs909bzjRjVlq2DmQ32CEtvmo603l3J+V607Aym53m7UaW/ZJllAgZICZdr8hsr7gNMowHK5WVwdD4CQMo/7lrxnnck+sosbD/EoaILbmuQfjLgjdwUWWrC/ZYj07IN0CSxUEd0fk472lqf8MEm0x/1lIxD5Y4cNxaPeLTrtKkpyq8Z8ii0wpLg7F61g8mb0jwP0WUGoydqL+MiCQIHuQW4Fp0qUQnQ7eOWiZ4LIm1LJc1rBNGyU6qODGisfgNCHJ2D1qklVYY2qva5HodSzW59ocPyoYXEJMARJ7a3cJpCy/E+GRCsbB3FUtZO8FivMl2XDV6tBIA6rYY99FfViq1XLHCiGJ3OuhEEAcTfgMy6L2JlU2NZ8GiRd8IMcFBfnQ+y+WULHVmYnnPlEgUKdNZJveB5OQdkG9ClGeo9HMCLKYq5lwvbTY8a88CkRcCSFfFCPN6plvdOnrI9Yp/ApFNlX72DdEC/XMZ0AQ8RH1d9T1OgUkOBX2/rwECYk4+dXo7B72y5isY0gwP3N9mVPCyArct+visyiFVhe1mx7R9BLOFeLJ/Gdy8n/MSkRB8aE3V8vdVl2MLJnv6WICibAoDEbFkNZr9F1TioV5/DjoaSS7AS4BquDOK7M1rMP+RFHdioZWyHn1JDxqywZoPK15foafFtBXs7n0MLKxhMx5d5rzjW+kXhFg5OWAHwZSIAIBpvuojUsrXaIMeO4TqR3UQqjB6DgqbgdyFQKoiMAMYk5cHqFO4PN7oBu1IGyVYXyaXXCQkmslvuxEeYU83NwSDeLKs5UP+WdECR6/7+XYdzALYvBJ7M98h8FyoWubttfxOsC4ruqW1lp/dVKwqkA1a8LsgAGrnOSTuu9Osw2mzlu1dp0NpAxARgaiVrEJskCOAA0df5adg4tbbHxH80IMcP5aa+bPnYHiXMKtW/1hJCPc1vbXa1N28rEp3PyevaBhjF2LrvVY5sYf/AmTMaGMAJOLgZOCnaXjxw1g97IUtYIao8"
+        data-shasum="724eda53011523a5fc1225cc100af8d79985deae83b651505a1c2ebb9a913a61"
+        v-model="crypto"
+    />
+    <transition name="fade">
+        <div class="content" ref="content" v-show="cryptoStatus === 'success'"></div>
+    </transition>
+    
+    
+    
+    
+    
+    
     
 </div>
 
@@ -304,6 +287,20 @@
     </div>
     <script src="/js/main.js"></script>
     
+        <div id="vcomments"></div>
+
+<script src="/js/lib/valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: 'cK3EM6xXJsj61hqqNmXWUQvx-gzGzoHsz',
+        app_key: '4dyJwl1epUYkWuXh5gyOnl7b',
+        visitor: 'true',
+        placeholder: '留下点什么',
+        serverURLs: 'https://ck3em6xx.lc-cn-n1-shared.com',
+    });
+</script>
+            
     <footer id="footer">
     <div id="footer-wrap">
         <div>
