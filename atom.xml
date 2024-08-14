@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-08-12T14:51:43.222Z</updated>
+  <updated>2024-08-14T00:38:00.606Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/2024/08/12/AWD-tool%E5%BC%80%E5%8F%91/"/>
     <id>http://example.com/2024/08/12/AWD-tool%E5%BC%80%E5%8F%91/</id>
     <published>2024-08-12T14:17:45.000Z</published>
-    <updated>2024-08-12T14:51:43.222Z</updated>
+    <updated>2024-08-14T00:38:00.606Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>针对AWD比赛，从各种情景和需求所开发的自动化集成工具。后续会一直更新和完善……</p><p>目前可满足的功能：目标生成、扫描，原始后门利用，批量命令执行，木马升级(可支持四种马)，批量ssh操作，一键危险函数检测，文件备份，文件监控，日志<span id="more"></span>监控等等。</p><hr><h2 id="一、扫描模块"><a href="#一、扫描模块" class="headerlink" title="一、扫描模块"></a>一、扫描模块</h2><p>如果已知靶机地址，即不需要扫描，按任意键只生成地址即可。 </p><p>如靶机地址为 192.168.0.100-255 的80端口，在 ip.txt 中会生成对应地址。</p><p>如果未知靶机地址，需要借助 fscan.exe 来扫描(已集成于工具无需配置)，在 ip.txt 中可得到扫描结果，可以在 fscan.py 中修改匹配规则，只获取80端口开放情况。</p><h2 id="二、攻击模块"><a href="#二、攻击模块" class="headerlink" title="二、攻击模块"></a>二、攻击模块</h2>]]></content>
     
