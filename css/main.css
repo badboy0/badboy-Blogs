@@ -500,6 +500,7 @@
     overflow: auto;
     padding: 50px 30px 20px;
     white-space: pre;
+    opacity: 1;
 }
 .comment iframe,
 body::-webkit-scrollbar-track {
@@ -986,6 +987,14 @@ ol li {
     }
 }
 
+code {
+    padding: 1px 5px;
+    font-family: Inconsolata, Monaco, Consolas, 'Courier New', Courier, monospace;
+    font-size: 1.11rem;
+    color: #e96900;
+    background-color: #f8f8f8;
+    border-radius: 2px;
+}
 
 
 #toc {
