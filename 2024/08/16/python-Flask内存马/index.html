@@ -234,14 +234,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/flask/" style="color: #ff7d73">
+                <a href="/tags/flask/" style="color: #03a9f4">
                     flask
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/python/" style="color: #00bcd4">
+                <a href="/tags/python/" style="color: #ffa2c4">
                     python
                 </a>
             </span>
@@ -517,7 +517,7 @@ print(base64.b64encode(b))
 <li>字符串可采用拼接方式, 如<code>[&#39;__builtins__&#39;][&#39;eval&#39;]</code>变为<code>[&#39;__bui&#39;+&#39;ltins__&#39;][&#39;ev&#39;+&#39;al&#39;]</code>.</li>
 <li><code>__globals__</code>可用<code>__getattribute__(&#39;__globa&#39;+&#39;ls__&#39;)</code>替换.</li>
 <li><code>[]</code>可用<code>.__getitem__()</code>或<code>.pop()</code>替换.</li>
-<li>过滤<code>&#123;&#123;`或者`&#125;&#125;</code>, 可以使用<code>&#123;%`或者`%&#125;</code>绕过, <code>&#123;%%&#125;</code>中间可以执行<code>if</code>语句, 利用这一点可以进行类似盲注的操作或者外带代码执行结果.</li>
+<li>过滤<code>&#123;&#123; &#125;&#125;</code> , 可以使用 <code>&#123;% %&#125;</code> 绕过, <code>&#123;%%&#125;</code>中间可以执行<code>if</code>语句, 利用这一点可以进行类似盲注的操作或者外带代码执行结果.</li>
 <li>过滤<code>_</code>可以用编码绕过, 如<code>__class__</code>替换成<code>\x5f\x5fclass\x5f\x5f</code>, 还可以用<code>dir(0)[0][0]</code>或者<code>request[&#39;args&#39;]</code>或者<code>request[&#39;values&#39;]</code>绕过.</li>
 <li>过滤了<code>.</code>可以采用<code>attr()</code>或<code>[]</code>绕过.</li>
 <li>其它的手法参考<code>SSTI</code>绕过过滤的方法即可…</li>
