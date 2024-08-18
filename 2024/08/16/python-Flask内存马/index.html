@@ -213,7 +213,7 @@
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2024/8/17
+            2024/8/16
         </span>
         
         <span class="category">
@@ -234,8 +234,15 @@
             
             <span class="tag">
                 
-                <a href="/tags/flask/" style="color: #00a596">
+                <a href="/tags/flask/" style="color: #ff7d73">
                     flask
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/python/" style="color: #00bcd4">
+                    python
                 </a>
             </span>
             
@@ -246,7 +253,7 @@
     <div class="content" v-pre>
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>好久之前在各位师傅的博客里看过，语雀里一直贴着链接，这里暂且记录一下相关知识点。</p>
 <hr>
-<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>常用的Python框架有<code>Django</code>、<code>Flask</code>，这两者都可能存在<code>SSTI</code>漏洞。</p>
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>常用的Python框架有<code>Django</code>、<code>Flask</code>，这两者都可能存在<code>SSTI</code>漏洞。<span id="more"></span></p>
 <p>Python 内存马利用Flask框架中SSTI注入来实现， Flask框架中在web应用模板渲染的过程中用到<code>render_template_string</code>进行渲染，但未对用户传输的代码进行过滤导致用户可以通过注入恶意代码来实现Python内存马的注入。</p>
 <p>注入内存马需要我们能执行代码，经典的方式是通过SSTI，当然也可以利用<code>pickle反序列化</code>等。</p>
 <p>本文基于SSTI漏洞环境为例。</p>
