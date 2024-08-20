@@ -234,7 +234,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" style="color: #ff7d73">
+                <a href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" style="color: #03a9f4">
                     智能合约
                 </a>
             </span>
@@ -419,9 +419,9 @@ contract Fallout &#123;
 <p>构造函数名称与合约名称不一致，同时在构造函数中指定了函数调用者直接为合约的owner</p>
 <p>旧版 Solidity 的 constructor 需要使用与合约同名的方法来定义，而这里的 <code>Fal1out</code> 和合约名 <code>Fallout</code> 不一致，所以可以说它并不是 constructor，而是一个全局函数，因此可以任意调用。</p>
 <p>攻击流程：</p>
-<pre><code class="solidity">await contract.owner();
+<pre><code class="solidity">await contract.owner()
 await contract.Fal1out()
-await contract.owner();
+await contract.owner()
 </code></pre>
 <hr>
 <h1 id="Coin-Flip"><a href="#Coin-Flip" class="headerlink" title="Coin Flip"></a>Coin Flip</h1><p>关卡要求：</p>
