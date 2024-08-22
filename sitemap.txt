@@ -13,7 +13,7 @@ http://example.com/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/
 http://example.com/tags/flask/
 http://example.com/tags/python/
 http://example.com/categories/WEB/
-http://example.com/categories/WEB/%E9%A1%B9%E7%9B%AE/
-http://example.com/categories/WEB/%E9%A1%B9%E7%9B%AE/AWD/
 http://example.com/categories/Blockchain/
+http://example.com/categories/WEB/%E9%A1%B9%E7%9B%AE/
 http://example.com/categories/Blockchain/Writeup/
+http://example.com/categories/WEB/%E9%A1%B9%E7%9B%AE/AWD/

